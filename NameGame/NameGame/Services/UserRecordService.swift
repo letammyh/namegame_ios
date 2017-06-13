@@ -24,7 +24,6 @@ final class UserRecordService {
     private(set) var task: URLSessionDataTask? = nil
     
     
-    // Load data from JSON file into a list of UserRecord objects.
     func fetchUserRecords(completion: @escaping (Result<[UserRecord]>) -> Void) {
         let task = URLSession.shared.dataTask(with: Endpoint.userRecords) { [weak self] data, response, error in
             self?.task = nil

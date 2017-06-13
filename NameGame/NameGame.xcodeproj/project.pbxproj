@@ -65,7 +65,7 @@
 				B34EC1111EF039AB00192AE0 /* Result.swift */,
 				B34EC1131EF039BF00192AE0 /* ParsingError.swift */,
 			);
-			name = Utilities;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		B3F5BFF71EF03CDF003BF88D /* Model */ = {

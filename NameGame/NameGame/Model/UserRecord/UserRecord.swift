@@ -10,33 +10,34 @@ import Foundation
 
 struct UserRecord {
     
-    let id: String
-    let firstName: String
-    let lastName: String
-    let headshot: Headshot
-    
-    private enum JSONKey: String {
+    private enum CodingKey: String {
         case id
         case firstName
         case lastName
         case headshot
     }
     
+    let id: String
+    let firstName: String
+    let lastName: String
+    let headshot: Headshot
+    
+    
     init(dictionary: [String: Any]) throws {
-        guard let id = dictionary[JSONKey.id.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.id.rawValue)
+        guard let id = dictionary[CodingKey.id.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.id.rawValue)
         }
         
-        guard let firstName = dictionary[JSONKey.firstName.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.firstName.rawValue)
+        guard let firstName = dictionary[CodingKey.firstName.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.firstName.rawValue)
         }
         
-        guard let lastName = dictionary[JSONKey.lastName.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.lastName.rawValue)
+        guard let lastName = dictionary[CodingKey.lastName.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.lastName.rawValue)
         }
         
-        guard let headshotDictionary = dictionary[JSONKey.headshot.rawValue] as? [String:Any] else {
-            throw ParsingError.missingKey(JSONKey.headshot.rawValue)
+        guard let headshotDictionary = dictionary[CodingKey.headshot.rawValue] as? [String:Any] else {
+            throw ParsingError.missingKey(CodingKey.headshot.rawValue)
         }
         
         let headshot = try Headshot(dictionary: headshotDictionary)

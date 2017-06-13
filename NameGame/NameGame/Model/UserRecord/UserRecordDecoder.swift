@@ -11,14 +11,15 @@ import Foundation
 
 final class UserRecordDecoder {
     
-    fileprivate enum JSONKey: String {
+    private enum CodingKey: String {
         case items
     }
     
+
     private static func extractItems(data: Data) throws -> [[String: Any]] {
         let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-        guard let response = jsonObject as? [String: Any], let items = response[JSONKey.items.rawValue] as? [[String: Any]] else {
-            throw ParsingError.missingKey(JSONKey.items.rawValue)
+        guard let response = jsonObject as? [String: Any], let items = response[CodingKey.items.rawValue] as? [[String: Any]] else {
+            throw ParsingError.missingKey(CodingKey.items.rawValue)
         }
         
         return items

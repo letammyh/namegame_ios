@@ -10,15 +10,7 @@ import Foundation
 
 struct Headshot {
     
-    let type: String
-    let mimeType: String
-    let id: String
-    let url: String
-    let alt: String
-    let height: Int
-    let width: Int
-    
-    private enum JSONKey: String {
+    private enum CodingKey: String {
         case type
         case mimeType
         case id
@@ -28,33 +20,42 @@ struct Headshot {
         case width
     }
     
+    let type: String
+    let mimeType: String
+    let id: String
+    let url: String
+    let alt: String
+    let height: Int
+    let width: Int
+    
+    
     init(dictionary: [String:Any]) throws {
-        guard let type = dictionary[JSONKey.type.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.type.rawValue)
+        guard let type = dictionary[CodingKey.type.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.type.rawValue)
         }
         
-        guard let mimeType = dictionary[JSONKey.mimeType.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.mimeType.rawValue)
+        guard let mimeType = dictionary[CodingKey.mimeType.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.mimeType.rawValue)
         }
         
-        guard let id = dictionary[JSONKey.id.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.id.rawValue)
+        guard let id = dictionary[CodingKey.id.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.id.rawValue)
         }
         
-        guard let url = dictionary[JSONKey.url.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.url.rawValue)
+        guard let url = dictionary[CodingKey.url.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.url.rawValue)
         }
         
-        guard let alt = dictionary[JSONKey.alt.rawValue] as? String else {
-            throw ParsingError.missingKey(JSONKey.alt.rawValue)
+        guard let alt = dictionary[CodingKey.alt.rawValue] as? String else {
+            throw ParsingError.missingKey(CodingKey.alt.rawValue)
         }
         
-        guard let height = dictionary[JSONKey.height.rawValue] as? Int else {
-            throw ParsingError.missingKey(JSONKey.height.rawValue)
+        guard let height = dictionary[CodingKey.height.rawValue] as? Int else {
+            throw ParsingError.missingKey(CodingKey.height.rawValue)
         }
         
-        guard let width = dictionary[JSONKey.width.rawValue] as? Int else {
-            throw ParsingError.missingKey(JSONKey.width.rawValue)
+        guard let width = dictionary[CodingKey.width.rawValue] as? Int else {
+            throw ParsingError.missingKey(CodingKey.width.rawValue)
         }
         
         self.type = type
