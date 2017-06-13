@@ -2,7 +2,7 @@
 //  UserRecord.swift
 //  NameGame
 //
-//  Created by Tammy Le on 6/13/17.
+//  Created by Tammy Le on 6/12/17.
 //  Copyright © 2017 WillowTree Apps. All rights reserved.
 //
 
@@ -52,7 +52,18 @@ struct UserRecord {
 extension UserRecord: Equatable {
     
     public static func ==(lhs: UserRecord, rhs: UserRecord) -> Bool {
-        return false
+        return lhs.id == rhs.id
+    }
+    
+}
+
+extension UserRecord: Comparable {
+    
+    public static func <(lhs: UserRecord, rhs: UserRecord) -> Bool {
+        guard lhs.lastName != rhs.lastName else {
+            return lhs.firstName < rhs.firstName
+        }
+        return lhs.lastName < rhs.lastName
     }
     
 }
