@@ -10,4 +10,5 @@ import Foundation
 
 enum ParsingError: Error {
     case missingKey(String)
+    case malformedValue(String, Any)
 }

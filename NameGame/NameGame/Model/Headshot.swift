@@ -23,7 +23,7 @@ struct Headshot {
     let type: String
     let mimeType: String
     let id: String
-    let url: String
+    let url: URL
     let alt: String
     let height: Int
     let width: Int
@@ -42,7 +42,7 @@ struct Headshot {
             throw ParsingError.missingKey(CodingKey.id.rawValue)
         }
         
-        guard let url = dictionary[CodingKey.url.rawValue] as? String else {
+        guard var urlString = dictionary[CodingKey.url.rawValue] as? String else {
             throw ParsingError.missingKey(CodingKey.url.rawValue)
         }
         
@@ -56,6 +56,15 @@ struct Headshot {
         
         guard let width = dictionary[CodingKey.width.rawValue] as? Int else {
             throw ParsingError.missingKey(CodingKey.width.rawValue)
+        }
+        
+        // Resolve issue with missing scheme on url value.
+        if !urlString.hasPrefix("http") {
+            urlString = "https:" + urlString
+        }
+        
+        guard let url = URL(string: urlString) else {
+            throw ParsingError.malformedValue(CodingKey.url.rawValue, urlString)
         }
         
         self.type = type

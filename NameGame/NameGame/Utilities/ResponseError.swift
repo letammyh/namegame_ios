@@ -11,5 +11,5 @@ import Foundation
 enum ResponseError: Error {
     case emptyResponse
     case serverError
-    case emptyImage
+    case alreadyRequested
 }

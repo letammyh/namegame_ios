@@ -58,6 +58,14 @@ extension UserRecord: Equatable {
     
 }
 
+extension UserRecord: Hashable {
+    
+    public var hashValue: Int {
+        return id.hashValue
+    }
+    
+}
+
 extension UserRecord: Comparable {
     
     public static func <(lhs: UserRecord, rhs: UserRecord) -> Bool {

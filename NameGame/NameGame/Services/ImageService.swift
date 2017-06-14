@@ -11,20 +11,23 @@ import UIKit
 
 final class ImageService {
     
-    let sharedCache = NSCache<NSString, UIImage>()
+    private(set) var tasks = [URL: URLSessionDataTask]()
     
-    private(set) var task: URLSessionDataTask? = nil
+    deinit {
+        for task in tasks.values {
+            task.cancel()
+        }
+    }
     
-    
-    func fetchImage(userRecord: UserRecord, completion: @escaping (Result<UIImage>) -> Void) {
-        if let cacheImage = sharedCache.object(forKey: userRecord.headshot.url as NSString) {
-            completion(.success(cacheImage))
+    func fetchImage(url: URL, completion: @escaping (Result<UIImage>) -> Void) {
+        let imageURL = url.resizedImageURL(maxWidth: 600)
+        guard tasks[imageURL] == nil else {
+            completion(.failure(ResponseError.alreadyRequested))
             return
         }
         
-        let url = URL(string: userRecord.headshot.url)!
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            self?.task = nil
+        let task = URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
+            self?.tasks[imageURL] = nil
             
             guard error == nil else {
                 completion(.failure(error!))
@@ -42,7 +45,7 @@ final class ImageService {
             }
             
             guard let image = UIImage(data: data) else {
-                completion(.failure(ResponseError.emptyImage))
+                completion(.failure(ResponseError.emptyResponse))
                 return
             }
             
@@ -50,8 +53,28 @@ final class ImageService {
         }
         
         task.resume()
-        self.task = task 
+        self.tasks[imageURL] = task
     }
     
         
+}
+
+fileprivate extension URL {
+    
+    // Returns a new url using the free image resizing API from RSZ.io.
+    // https://rsz.io/
+    func resizedImageURL(maxWidth: Int) -> URL {
+        guard var components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
+            return self
+        }
+        
+        let item = URLQueryItem(name: "width", value: "\(maxWidth)")
+        var queryItems = components.queryItems ?? []
+        queryItems.append(item)
+        components.queryItems = queryItems
+        components.host = "rsz.io"
+        components.path = "images.contentful.com/" + components.path
+        return components.url ?? self
+    }
+    
 }
