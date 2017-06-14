@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		03909FE01DDE4ACE00C701A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */; };
 		03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE45601DD1302700ABF7FA /* NameGame.swift */; };
+		B34EC1121EF039AB00192AE0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1111EF039AB00192AE0 /* Result.swift */; };
+		B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1131EF039BF00192AE0 /* ParsingError.swift */; };
+		B3F5BFF91EF03CF9003BF88D /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5BFF81EF03CF9003BF88D /* UserRecord.swift */; };
+		B3F5BFFB1EF03D0F003BF88D /* UserRecordDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5BFFA1EF03D0F003BF88D /* UserRecordDecoder.swift */; };
+		B3F5BFFD1EF03D1E003BF88D /* Headshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5BFFC1EF03D1E003BF88D /* Headshot.swift */; };
+		B3FE253B1EF03C650054C2BA /* UserRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE253A1EF03C650054C2BA /* UserRecordService.swift */; };
 		EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */; };
 		EC6A1AB91C8F6E5A0071F529 /* NameGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */; };
 		EC6A1ABC1C8F6E5A0071F529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6A1ABA1C8F6E5A0071F529 /* Main.storyboard */; };
@@ -19,6 +25,12 @@
 /* Begin PBXFileReference section */
 		03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03CE45601DD1302700ABF7FA /* NameGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameGame.swift; sourceTree = "<group>"; };
+		B34EC1111EF039AB00192AE0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B34EC1131EF039BF00192AE0 /* ParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
+		B3F5BFF81EF03CF9003BF88D /* UserRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
+		B3F5BFFA1EF03D0F003BF88D /* UserRecordDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecordDecoder.swift; sourceTree = "<group>"; };
+		B3F5BFFC1EF03D1E003BF88D /* Headshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Headshot.swift; sourceTree = "<group>"; };
+		B3FE253A1EF03C650054C2BA /* UserRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecordService.swift; sourceTree = "<group>"; };
 		EC6A1AB31C8F6E5A0071F529 /* NameGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NameGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGameViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +59,41 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		B34EC1101EF0399B00192AE0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B34EC1111EF039AB00192AE0 /* Result.swift */,
+				B34EC1131EF039BF00192AE0 /* ParsingError.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B3F5BFF71EF03CDF003BF88D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3F5BFFE1EF03D44003BF88D /* UserRecord */,
+				B3F5BFFC1EF03D1E003BF88D /* Headshot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3F5BFFE1EF03D44003BF88D /* UserRecord */ = {
+			isa = PBXGroup;
+			children = (
+				B3F5BFF81EF03CF9003BF88D /* UserRecord.swift */,
+				B3F5BFFA1EF03D0F003BF88D /* UserRecordDecoder.swift */,
+			);
+			path = UserRecord;
+			sourceTree = "<group>";
+		};
+		B3FE25391EF03C540054C2BA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B3FE253A1EF03C650054C2BA /* UserRecordService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		EC6A1AAA1C8F6E5A0071F529 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +113,9 @@
 		EC6A1AB51C8F6E5A0071F529 /* NameGame */ = {
 			isa = PBXGroup;
 			children = (
+				B3F5BFF71EF03CDF003BF88D /* Model */,
+				B3FE25391EF03C540054C2BA /* Services */,
+				B34EC1101EF0399B00192AE0 /* Utilities */,
 				EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */,
 				EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */,
 				03CE45601DD1302700ABF7FA /* NameGame.swift */,
@@ -151,9 +201,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6A1AB91C8F6E5A0071F529 /* NameGameViewController.swift in Sources */,
+				B3F5BFFB1EF03D0F003BF88D /* UserRecordDecoder.swift in Sources */,
+				B3F5BFF91EF03CF9003BF88D /* UserRecord.swift in Sources */,
+				B3F5BFFD1EF03D1E003BF88D /* Headshot.swift in Sources */,
+				B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */,
 				EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */,
+				B34EC1121EF039AB00192AE0 /* Result.swift in Sources */,
 				03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */,
 				ECF50AB51C9331CA00C41A1D /* FaceButton.swift in Sources */,
+				B3FE253B1EF03C650054C2BA /* UserRecordService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
