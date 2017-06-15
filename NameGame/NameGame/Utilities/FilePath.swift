@@ -24,11 +24,13 @@ final class FilePath {
     
     static func createDirectories() {
         do {
-            try FileManager.default.createDirectory(
-                at: imageDirectory,
-                withIntermediateDirectories: false,
-                attributes: nil
-            )
+            if !FileManager.default.fileExists(atPath: imageDirectory.relativePath, isDirectory: nil) {
+                try FileManager.default.createDirectory(
+                    at: imageDirectory,
+                    withIntermediateDirectories: false,
+                    attributes: nil
+                )
+            }
         } catch {
             print("\(#function): \(error)")
         }

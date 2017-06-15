@@ -8,7 +8,8 @@
 
 import UIKit
 
-class UserRecordCell: UICollectionViewCell {
+final class UserRecordCell: UICollectionViewCell {
+    
     @IBOutlet weak var imageView: UIImageView!
     
     static func dequeueCell(in collectionView: UICollectionView, with identifier: String, for indexPath: IndexPath) -> UserRecordCell {
