@@ -17,6 +17,8 @@
 		B34EC1121EF039AB00192AE0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1111EF039AB00192AE0 /* Result.swift */; };
 		B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1131EF039BF00192AE0 /* ParsingError.swift */; };
 		B3809CA71EF31B3C00CB3CAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */; };
+		B39D020F1EF86A71006CC8D1 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39D020E1EF86A71006CC8D1 /* ReSwift.framework */; };
+		B39D02101EF86A71006CC8D1 /* ReSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B39D020E1EF86A71006CC8D1 /* ReSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3CE028A1EF1A4EB0090A944 /* UserGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */; };
 		B3D35EF81EF42CFE00DE9EAA /* NameGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D35EF71EF42CFE00DE9EAA /* NameGameViewController.swift */; };
 		B3F5BFF91EF03CF9003BF88D /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5BFF81EF03CF9003BF88D /* UserRecord.swift */; };
@@ -29,6 +31,20 @@
 		ECF50AB51C9331CA00C41A1D /* FaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF50AB41C9331CA00C41A1D /* FaceButton.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B39D02111EF86A71006CC8D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B39D02101EF86A71006CC8D1 /* ReSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03CE45601DD1302700ABF7FA /* NameGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameGame.swift; path = ../NameGame.swift; sourceTree = "<group>"; };
@@ -40,6 +56,7 @@
 		B34EC1111EF039AB00192AE0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B34EC1131EF039BF00192AE0 /* ParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
 		B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		B39D020E1EF86A71006CC8D1 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
 		B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridViewController.swift; sourceTree = "<group>"; };
 		B3D35EF71EF42CFE00DE9EAA /* NameGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameGameViewController.swift; path = ../NameGameViewController.swift; sourceTree = "<group>"; };
 		B3F5BFF81EF03CF9003BF88D /* UserRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
@@ -59,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39D020F1EF86A71006CC8D1 /* ReSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +101,14 @@
 				B322A4461EF182E1009ABB4B /* FilePath.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B39D020B1EF86A56006CC8D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B39D020E1EF86A71006CC8D1 /* ReSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B3CE02881EF1A4D30090A944 /* UserCollectionViewController */ = {
@@ -145,6 +171,7 @@
 			children = (
 				EC6A1AB51C8F6E5A0071F529 /* NameGame */,
 				EC6A1AB41C8F6E5A0071F529 /* Products */,
+				B39D020B1EF86A56006CC8D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +211,8 @@
 				EC6A1AAF1C8F6E5A0071F529 /* Sources */,
 				EC6A1AB01C8F6E5A0071F529 /* Frameworks */,
 				EC6A1AB11C8F6E5A0071F529 /* Resources */,
+				B39D02111EF86A71006CC8D1 /* Embed Frameworks */,
+				B39D02121EF86A7B006CC8D1 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,6 +269,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B39D02121EF86A7B006CC8D1 /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC6A1AAF1C8F6E5A0071F529 /* Sources */ = {
@@ -372,6 +419,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = NameGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.NameGame;
@@ -384,6 +435,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = NameGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.willowtreeapps.NameGame;
