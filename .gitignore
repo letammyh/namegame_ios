@@ -1,1 +1,3 @@
 *.xcuserdatad/
+/NameGame/Carthage/*
+.DS_Store
