@@ -42,9 +42,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Qv9-6N-ZjV" secondAttribute="trailing" constant="23" id="b4D-ED-L3K"/>
-                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fO-z7-bOS">
                                         <rect key="frame" x="0.0" y="78" width="320" height="166"/>
