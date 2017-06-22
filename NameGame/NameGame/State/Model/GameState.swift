@@ -31,4 +31,5 @@ struct GameState {
         self.images = Loading.notAsked
         self.question = question
     }
+    
 }

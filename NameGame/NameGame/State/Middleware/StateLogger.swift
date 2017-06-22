@@ -13,4 +13,5 @@ final class StateLogger: StoreSubscriber {
     func newState(state: AppState) {
         print("GameState: \(String(describing: state.gameState))")
     }
+    
 }

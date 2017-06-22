@@ -12,32 +12,29 @@ import UIKit
 enum GameAction: Action {
     case setImages(Loading<[UIImage]>)
     case setStatus(GameState.Status)
-    case playerAnswersCorrectly
-    case goToNextQuestion(Question)
-    case gameTerminated
+    case setScore(Int)
+    case setQuestion(Question)
 }
 
 final class GameReducer {
     
     class func handle(action: Action, state: AppState) -> AppState {
-        guard let action = action as? GameAction else {
+        guard let action = action as? GameAction, var gameState = state.gameState else {
             return state
         }
         
-        var state = state
         switch action {
         case .setImages(let loadingStatus):
-            state.gameState?.images = loadingStatus
+            gameState.images = loadingStatus
         case .setStatus(let status):
-            state.gameState?.status = status
-        case .playerAnswersCorrectly:
-            state.gameState?.score += 1
-        case .goToNextQuestion(let question):
-            state.gameState?.question = question
-        case .gameTerminated:
-            state.gameState = nil
+            gameState.status = status
+        case .setScore(let int):
+            gameState.score = int
+        case .setQuestion(let question):
+            gameState.question = question
         }
         
         return state
     }
+    
 }

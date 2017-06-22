@@ -27,4 +27,5 @@ struct Question {
         self.playerChoice = nil
         self.status = .unanswered
     }
+    
 }

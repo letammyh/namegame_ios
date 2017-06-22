@@ -17,4 +17,5 @@ struct AppState: StateType {
         userRecords = .notAsked
         gameState = nil
     }
+    
 }

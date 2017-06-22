@@ -11,6 +11,7 @@ import ReSwift
 enum AppAction: Action {
     case setUserRecords(Loading<[UserRecord]>)
     case setGameState(GameState)
+    case endGame
 }
 
 final class AppReducer {
@@ -23,7 +24,9 @@ final class AppReducer {
             case .setUserRecords(let loadingStatus):
                 state.userRecords = loadingStatus
             case .setGameState(let gameState):
-                state.gameState = gameState 
+                state.gameState = gameState
+            case .endGame:
+                state.gameState = nil
             }
         } else {
             state = GameReducer.handle(action: action, state: state)
@@ -31,4 +34,5 @@ final class AppReducer {
         
         return state 
     }
+    
 }
