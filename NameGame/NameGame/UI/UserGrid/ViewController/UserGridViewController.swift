@@ -13,8 +13,12 @@ final class UserGridViewController: UICollectionViewController {
     static let reuseIdentifier = "userRecordCell"
     
     fileprivate(set) var userRecords = [UserRecord]()
-    
     private let imageCache = ImageCache()
+    weak var lifecycleObserver: ViewLifecycleObserver? = nil
+    
+    class func make() -> UserGridViewController {
+        return UIStoryboard.main.make()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

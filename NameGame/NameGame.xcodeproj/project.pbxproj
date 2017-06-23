@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		03909FE01DDE4ACE00C701A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */; };
 		03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE45601DD1302700ABF7FA /* NameGame.swift */; };
+		B30DE05C1EFC46190012F695 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE05B1EFC46190012F695 /* Coordinator.swift */; };
+		B30DE0611EFC4AC60012F695 /* ViewLifecycleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE0601EFC4AC60012F695 /* ViewLifecycleObserver.swift */; };
+		B30DE06F1EFC4F8F0012F695 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE06E1EFC4F8F0012F695 /* AppCoordinator.swift */; };
+		B30DE0711EFC51720012F695 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE0701EFC51720012F695 /* MenuCoordinator.swift */; };
+		B30DE0731EFC52AE0012F695 /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE0721EFC52AE0012F695 /* UIStoryboardExtensions.swift */; };
+		B30DE0761EFC5E2C0012F695 /* UserGridCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30DE0751EFC5E2C0012F695 /* UserGridCoordinator.swift */; };
 		B322A4411EF16E44009ABB4B /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322A4401EF16E44009ABB4B /* ImageService.swift */; };
 		B322A4431EF16E9A009ABB4B /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322A4421EF16E9A009ABB4B /* ResponseError.swift */; };
 		B322A4451EF17B36009ABB4B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322A4441EF17B36009ABB4B /* ImageCache.swift */; };
@@ -55,6 +61,12 @@
 /* Begin PBXFileReference section */
 		03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03CE45601DD1302700ABF7FA /* NameGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameGame.swift; sourceTree = "<group>"; };
+		B30DE05B1EFC46190012F695 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		B30DE0601EFC4AC60012F695 /* ViewLifecycleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLifecycleObserver.swift; sourceTree = "<group>"; };
+		B30DE06E1EFC4F8F0012F695 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B30DE0701EFC51720012F695 /* MenuCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		B30DE0721EFC52AE0012F695 /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
+		B30DE0751EFC5E2C0012F695 /* UserGridCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridCoordinator.swift; sourceTree = "<group>"; };
 		B322A4401EF16E44009ABB4B /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		B322A4421EF16E9A009ABB4B /* ResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
 		B322A4441EF17B36009ABB4B /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -105,14 +117,78 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B34EC1101EF0399B00192AE0 /* Utilities */ = {
+		B30DE0621EFC4BE90012F695 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B322A4461EF182E1009ABB4B /* FilePath.swift */,
+				B30DE0631EFC4C040012F695 /* Root */,
+				B30DE0641EFC4C080012F695 /* Menu */,
+				B30DE0651EFC4C140012F695 /* UserGrid */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B30DE0631EFC4C040012F695 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				B30DE06E1EFC4F8F0012F695 /* AppCoordinator.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		B30DE0641EFC4C080012F695 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B30DE0681EFC4EE30012F695 /* ViewController */,
+				B30DE0701EFC51720012F695 /* MenuCoordinator.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		B30DE0651EFC4C140012F695 /* UserGrid */ = {
+			isa = PBXGroup;
+			children = (
+				B30DE0691EFC4EED0012F695 /* ViewController */,
+				B30DE0751EFC5E2C0012F695 /* UserGridCoordinator.swift */,
+			);
+			path = UserGrid;
+			sourceTree = "<group>";
+		};
+		B30DE0681EFC4EE30012F695 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B30DE0691EFC4EED0012F695 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */,
+				B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B30DE0741EFC56F60012F695 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
 				B3AB24F51EFAF56900E954EE /* Loading.swift */,
 				B34EC1131EF039BF00192AE0 /* ParsingError.swift */,
 				B322A4421EF16E9A009ABB4B /* ResponseError.swift */,
 				B34EC1111EF039AB00192AE0 /* Result.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B34EC1101EF0399B00192AE0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B30DE0741EFC56F60012F695 /* Enums */,
+				B30DE05B1EFC46190012F695 /* Coordinator.swift */,
+				B322A4461EF182E1009ABB4B /* FilePath.swift */,
+				B30DE0721EFC52AE0012F695 /* UIStoryboardExtensions.swift */,
+				B30DE0601EFC4AC60012F695 /* ViewLifecycleObserver.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -162,15 +238,6 @@
 			path = Reducer;
 			sourceTree = "<group>";
 		};
-		B3CE02881EF1A4D30090A944 /* UserCollectionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */,
-				B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */,
-			);
-			path = UserCollectionViewController;
-			sourceTree = "<group>";
-		};
 		B3D35EF41EF42B8800DE9EAA /* GameViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,14 +264,6 @@
 				B3F5BFFA1EF03D0F003BF88D /* UserRecordDecoder.swift */,
 			);
 			path = UserRecord;
-			sourceTree = "<group>";
-		};
-		B3F940261EF3172100BA44F4 /* MenuViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */,
-			);
-			path = MenuViewController;
 			sourceTree = "<group>";
 		};
 		B3FE25391EF03C540054C2BA /* Services */ = {
@@ -239,10 +298,9 @@
 			isa = PBXGroup;
 			children = (
 				B3D35EF41EF42B8800DE9EAA /* GameViewController */,
-				B3F940261EF3172100BA44F4 /* MenuViewController */,
-				B3CE02881EF1A4D30090A944 /* UserCollectionViewController */,
 				B3FE25391EF03C540054C2BA /* Services */,
 				B3AB24EA1EFAF30500E954EE /* State */,
+				B30DE0621EFC4BE90012F695 /* UI */,
 				B34EC1101EF0399B00192AE0 /* Utilities */,
 				EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */,
 				EC6A1ABD1C8F6E5A0071F529 /* Assets.xcassets */,
@@ -350,10 +408,14 @@
 				B3CE028A1EF1A4EB0090A944 /* UserGridViewController.swift in Sources */,
 				B3AB24ED1EFAF3CF00E954EE /* StateLogger.swift in Sources */,
 				B3AB24EF1EFAF44000E954EE /* AppState.swift in Sources */,
+				B30DE0761EFC5E2C0012F695 /* UserGridCoordinator.swift in Sources */,
+				B30DE0711EFC51720012F695 /* MenuCoordinator.swift in Sources */,
 				B3AB24FE1EFB131600E954EE /* AppReducer.swift in Sources */,
+				B30DE06F1EFC4F8F0012F695 /* AppCoordinator.swift in Sources */,
 				B322A4451EF17B36009ABB4B /* ImageCache.swift in Sources */,
 				B3AB24F61EFAF56900E954EE /* Loading.swift in Sources */,
 				B33ED8D21EF1D60600CE899E /* UserRecordCell.swift in Sources */,
+				B30DE0611EFC4AC60012F695 /* ViewLifecycleObserver.swift in Sources */,
 				B3F5BFFB1EF03D0F003BF88D /* UserRecordDecoder.swift in Sources */,
 				B3F5BFF91EF03CF9003BF88D /* UserRecord.swift in Sources */,
 				B3AB24FB1EFAFA1D00E954EE /* Question.swift in Sources */,
@@ -363,10 +425,12 @@
 				B3809CA71EF31B3C00CB3CAC /* MenuViewController.swift in Sources */,
 				B3F5BFFD1EF03D1E003BF88D /* Headshot.swift in Sources */,
 				B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */,
+				B30DE0731EFC52AE0012F695 /* UIStoryboardExtensions.swift in Sources */,
 				EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */,
 				B34EC1121EF039AB00192AE0 /* Result.swift in Sources */,
 				03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */,
 				B322A4411EF16E44009ABB4B /* ImageService.swift in Sources */,
+				B30DE05C1EFC46190012F695 /* Coordinator.swift in Sources */,
 				ECF50AB51C9331CA00C41A1D /* FaceButton.swift in Sources */,
 				B3FE253B1EF03C650054C2BA /* UserRecordService.swift in Sources */,
 			);
