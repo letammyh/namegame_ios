@@ -15,7 +15,6 @@ final class MenuCoordinator: Coordinator {
     let store: Store<AppState>
     let container: UINavigationController
     private(set) var controller: MenuViewController?
-    private(set) var userRecordService: UserRecordService!
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
@@ -30,16 +29,25 @@ final class MenuCoordinator: Coordinator {
         }
         
         let controller = MenuViewController.make()
-        controller.lifecycleObserver = self
+        let workflow = MenuWorkflow(store: store)
+        workflow.inject(UserRecordService.shared)
+        workflow.refreshUserRecords()
+        workflow.coordinatorHandler = self
+        controller.inject(workflow)
         container.viewControllers = [controller]
-    }
-    
-    func inject(_ service: UserRecordService) {
-        self.userRecordService = service
     }
     
 }
 
-extension MenuCoordinator: ViewLifecycleObserver {
+extension MenuCoordinator: CoordinatorHandler {
+    
+    func createUserGridCoordinator() {
+        let coordinator = UserGridCoordinator(store: store, container: container)
+        coordinator.start()
+    }
+    
+    func createGameCoordinator() {
+        // TODO
+    }
 }
 

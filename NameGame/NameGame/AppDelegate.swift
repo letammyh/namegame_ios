@@ -34,9 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             preconditionFailure("Expected 'UINavigationController' as window root view controller.")
         }
         appCoordinator = AppCoordinator(store: store, container: navigationController)
+        store.subscribe(logger)
         FilePath.createDirectories()
         
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        appCoordinator.start()
     }
     
 }

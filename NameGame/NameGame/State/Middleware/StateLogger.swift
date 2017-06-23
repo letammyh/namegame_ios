@@ -11,7 +11,8 @@ import ReSwift
 final class StateLogger: StoreSubscriber {
     
     func newState(state: AppState) {
-        print("GameState: \(String(describing: state.gameState))")
+//        print("GameState: \(String(describing: state.gameState))")print("GameState: \(String(describing: state.gameState))")
+        print("State: \(String(describing: state))")
     }
     
 }

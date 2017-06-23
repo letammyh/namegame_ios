@@ -14,7 +14,7 @@
         <!--Menu View Controller-->
         <scene sceneID="MvY-9e-W7M">
             <objects>
-                <viewController id="i6m-G8-V83" customClass="MenuViewController" customModule="NameGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="i6m-G8-V83" customClass="MenuViewController" customModule="NameGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RCU-1A-a0o"/>
                         <viewControllerLayoutGuide type="bottom" id="FtD-cj-clo"/>
@@ -61,7 +61,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="flipHorizontal" id="5Nm-Ld-5MI"/>
+                                                    <action selector="playButtonPressedWithSender:" destination="i6m-G8-V83" eventType="touchUpInside" id="rob-yB-sWG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrK-5g-EQl">
@@ -75,7 +75,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="7IY-ot-HG5" kind="show" id="pTV-i2-QMg"/>
+                                                    <action selector="teamMembersButtonPressedWithSender:" destination="i6m-G8-V83" eventType="touchUpInside" id="SSr-HK-B7m"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -110,8 +110,8 @@
         <!--User Grid View Controller-->
         <scene sceneID="gXI-5w-nX7">
             <objects>
-                <collectionViewController id="7IY-ot-HG5" customClass="UserGridViewController" customModule="NameGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="26g-q6-FAb">
+                <collectionViewController storyboardIdentifier="UserGridViewController" id="7IY-ot-HG5" customClass="UserGridViewController" customModule="NameGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="26g-q6-FAb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20178869366645813" green="0.54113125801086426" blue="0.59220719337463379" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -304,9 +304,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="i6m-G8-V83" kind="relationship" relationship="rootViewController" id="0fp-v2-Ztg"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Shi-Bd-WjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import ReSwift
+
+protocol MenuViewEventHandler {
+    func didPressPlayButton()
+    func didPressTeamMembersButton()
+}
 
 class MenuViewController: UIViewController {
 
@@ -14,7 +20,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var teamMembersButton: UIButton!
     
-    weak var lifecycleObserver: ViewLifecycleObserver? = nil
+    private var eventHandler: MenuViewEventHandler!
+//    weak var lifecycleObserver: ViewLifecycleObserver? = nil
     
     class func make() -> MenuViewController {
         return UIStoryboard.main.make()
@@ -29,6 +36,19 @@ class MenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction private func playButtonPressed(sender: AnyObject) {
+        eventHandler.didPressPlayButton()
+    }
+    
+    @IBAction private func teamMembersButtonPressed(sender: AnyObject) {
+        eventHandler.didPressTeamMembersButton()
+    }
+    
+    func inject(_ eventHandler: MenuViewEventHandler) {
+        self.eventHandler = eventHandler
+    }
 
 }
+
 
