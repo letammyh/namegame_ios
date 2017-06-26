@@ -23,32 +23,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-Dn-ypI" userLabel="viewStack">
-                                <rect key="frame" x="0.0" y="104" width="320" height="394"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-Dn-ypI" userLabel="Stack">
+                                <rect key="frame" x="0.0" y="60" width="320" height="438"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SlU-lO-UFn" userLabel="titleStack">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  NAME GAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4m-SC-YwY">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="45"/>
-                                                <color key="textColor" red="0.20178869366645813" green="0.54113125801086426" blue="0.59220719337463379" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Willow Tree Apps  " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv9-6N-ZjV">
-                                                <rect key="frame" x="0.0" y="54" width="320" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                                <color key="textColor" red="0.20178869366645813" green="0.54113125801086426" blue="0.59220719337463379" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKU-aO-EdC" userLabel="NameGameStack">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zm5-CA-YSy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="46"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="Avh-VY-1t8"/>
+                                                            <constraint firstAttribute="height" constant="46" id="qek-Ye-3Hu"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME GAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j21-vj-kcB">
+                                                        <rect key="frame" x="30" y="0.0" width="290" height="46"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="46" id="k4o-2S-haK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="45"/>
+                                                        <color key="textColor" red="0.20178869369999999" green="0.54113125799999995" blue="0.59220719340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3N-Ll-GGq" userLabel="WTAStack">
+                                                <rect key="frame" x="0.0" y="46" width="320" height="24"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Willow Tree Apps           " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpX-wd-Ug2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="QqO-EY-9NH"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                                        <color key="textColor" red="0.20178869369999999" green="0.54113125799999995" blue="0.59220719340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBb-Hy-XKs">
+                                                        <rect key="frame" x="290" y="0.0" width="30" height="24"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="JS3-jt-Y3F"/>
+                                                            <constraint firstAttribute="width" constant="30" id="t26-Dm-vnJ"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fO-z7-bOS">
-                                        <rect key="frame" x="0.0" y="78" width="320" height="166"/>
+                                        <rect key="frame" x="0.0" y="70" width="320" height="218"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-bG-0tr">
-                                        <rect key="frame" x="0.0" y="244" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="288" width="320" height="150"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uy-HI-QBx">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
@@ -98,7 +130,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="wRo-AC-n7J"/>
                     <connections>
-                        <outlet property="nameGameLabel" destination="U4m-SC-YwY" id="kiG-SE-TNa"/>
                         <outlet property="playButton" destination="0uy-HI-QBx" id="loD-Ux-Iex"/>
                         <outlet property="teamMembersButton" destination="MrK-5g-EQl" id="8XC-SR-NRv"/>
                     </connections>
@@ -111,16 +142,21 @@
         <scene sceneID="gXI-5w-nX7">
             <objects>
                 <collectionViewController storyboardIdentifier="UserGridViewController" id="7IY-ot-HG5" customClass="UserGridViewController" customModule="NameGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="26g-q6-FAb">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="26g-q6-FAb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20178869366645813" green="0.54113125801086426" blue="0.59220719337463379" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hAt-pM-HyX">
                             <size key="itemSize" width="110" height="130"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="50"/>
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="NmE-Me-bEY" userLabel="Loading Indicator">
+                            <rect key="frame" x="143" y="203" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userRecordCell" id="BVd-jb-E1z" customClass="UserRecordCell" customModule="NameGame" customModuleProvider="target">
                                 <rect key="frame" x="10" y="10" width="110" height="130"/>
@@ -147,11 +183,37 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mainMenuFooter" id="A7B-81-Ctc">
+                            <rect key="frame" x="0.0" y="150" width="320" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1T-Kv-B2y">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                    <color key="backgroundColor" red="0.20178869366645813" green="0.54113125801086426" blue="0.59220719337463379" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                    <state key="normal" title="Main Menu">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="X1T-Kv-B2y" firstAttribute="centerY" secondItem="A7B-81-Ctc" secondAttribute="centerY" id="GIj-vO-3Kc"/>
+                                <constraint firstItem="X1T-Kv-B2y" firstAttribute="top" secondItem="A7B-81-Ctc" secondAttribute="top" id="RfZ-CO-Cla"/>
+                                <constraint firstItem="X1T-Kv-B2y" firstAttribute="leading" secondItem="A7B-81-Ctc" secondAttribute="leading" id="TR5-Id-t19"/>
+                                <constraint firstAttribute="trailing" secondItem="X1T-Kv-B2y" secondAttribute="trailing" id="YKp-nM-t1A"/>
+                                <constraint firstAttribute="bottom" secondItem="X1T-Kv-B2y" secondAttribute="bottom" id="d9H-y2-v1A"/>
+                                <constraint firstItem="X1T-Kv-B2y" firstAttribute="centerX" secondItem="A7B-81-Ctc" secondAttribute="centerX" id="glv-Bc-uMz"/>
+                            </constraints>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="7IY-ot-HG5" id="N6y-Al-ohM"/>
                             <outlet property="delegate" destination="7IY-ot-HG5" id="tLR-3C-pFV"/>
                         </connections>
                     </collectionView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="NmE-Me-bEY" id="LcD-QJ-S0R"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoC-te-Rsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -304,6 +366,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="04A-dP-wYo">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Shi-Bd-WjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

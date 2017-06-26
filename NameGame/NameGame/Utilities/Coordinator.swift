@@ -12,3 +12,7 @@ protocol Coordinator {
     var isStarted: Bool { get }
     func start()
 }
+
+protocol CoordinatorEventObserver: class {
+    func willStop(coordinator: Coordinator)
+}

@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         self.logger = StateLogger()
+        self.logger.logLevel = .fullState
         super.init()
     }
 
@@ -33,9 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = self.window, let navigationController = window.rootViewController as? UINavigationController else {
             preconditionFailure("Expected 'UINavigationController' as window root view controller.")
         }
+        FilePath.createDirectories()
         appCoordinator = AppCoordinator(store: store, container: navigationController)
         store.subscribe(logger)
-        FilePath.createDirectories()
         
         return true
     }

@@ -15,6 +15,9 @@ final class UserGridCoordinator: Coordinator {
     let store: Store<AppState>
     let container: UINavigationController
     private(set) var controller: UserGridViewController?
+    var imageCache: ImageCache!
+    
+    weak var controllerEventObserver: CoordinatorEventObserver?
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
@@ -27,15 +30,42 @@ final class UserGridCoordinator: Coordinator {
         guard !isStarted else {
             return
         }
-
+        
         let controller = UserGridViewController.make()
+        controller.inject(imageCache)
         controller.lifecycleObserver = self
-        container.viewControllers = [controller]
+        self.controller = controller
+        container.pushViewController(controller, animated: true)
     }
     
-
+    func inject(_ imageCache: ImageCache) {
+        self.imageCache = imageCache
+    }
     
 }
 
 extension UserGridCoordinator: ViewLifecycleObserver {
+    
+    func viewWillAppear(_ animated: Bool) {
+        guard let controller = self.controller else {
+            return
+        }
+        
+        store.subscribe(controller) { state in
+            state.select(UserGridViewModel.init)
+        }
+    }
+    
+    func viewWillDisappear(_ animated: Bool) {
+        guard let controller = self.controller else {
+            return
+        }
+        
+        store.unsubscribe(controller)
+        if !container.viewControllers.contains(controller) {
+            controllerEventObserver?.willStop(coordinator: self)
+        }
+
+    }
+    
 }

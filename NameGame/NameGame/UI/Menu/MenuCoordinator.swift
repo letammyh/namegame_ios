@@ -15,12 +15,16 @@ final class MenuCoordinator: Coordinator {
     let store: Store<AppState>
     let container: UINavigationController
     private(set) var controller: MenuViewController?
+    fileprivate var imageCache: ImageCache!
+    
+    fileprivate(set) var currentCoordinator: Coordinator?
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
         self.store = store
         self.container = container
         self.controller = nil
+        self.currentCoordinator = nil
     }
     
     func start() {
@@ -28,26 +32,44 @@ final class MenuCoordinator: Coordinator {
             return
         }
         
-        let controller = MenuViewController.make()
         let workflow = MenuWorkflow(store: store)
+        let controller = MenuViewController.make()
         workflow.inject(UserRecordService.shared)
         workflow.refreshUserRecords()
-        workflow.coordinatorHandler = self
-        controller.inject(workflow)
-        container.viewControllers = [controller]
+        workflow.presentationEventObserver = self
+        controller.eventHandler = workflow
+        container.pushViewController(controller, animated: true)
+    }
+    
+    func inject(_ imageCache: ImageCache) {
+        self.imageCache = imageCache
     }
     
 }
 
-extension MenuCoordinator: CoordinatorHandler {
+extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
     
     func createUserGridCoordinator() {
         let coordinator = UserGridCoordinator(store: store, container: container)
+        coordinator.inject(imageCache)
+        coordinator.controllerEventObserver = self
+        currentCoordinator = coordinator
         coordinator.start()
     }
     
     func createGameCoordinator() {
         // TODO
     }
+    
+}
+
+extension MenuCoordinator: CoordinatorEventObserver {
+    
+    func willStop(coordinator: Coordinator) {
+        if ((coordinator as? UserGridCoordinator) != nil) {
+            currentCoordinator = nil
+        }
+    }
+
 }
 

@@ -30,8 +30,11 @@ final class AppCoordinator: Coordinator {
         }
         
         let coordinator = MenuCoordinator(store: store, container: container)
+        coordinator.inject(ImageCache())
         currentCoordinator = coordinator
         coordinator.start()
+        
+        // create user service and inject into menu coordinator -- remove shared instance 
     }
     
 }

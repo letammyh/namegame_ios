@@ -22,5 +22,4 @@ extension ViewLifecycleObserver {
     func viewDidAppear(_ animated: Bool) {}
     func viewWillDisappear(_ animated: Bool) {}
     func viewDidDisappear(_ animated: Bool) {}
-
 }

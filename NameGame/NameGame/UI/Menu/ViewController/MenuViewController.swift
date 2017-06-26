@@ -20,8 +20,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var teamMembersButton: UIButton!
     
-    private var eventHandler: MenuViewEventHandler!
-//    weak var lifecycleObserver: ViewLifecycleObserver? = nil
+    var eventHandler: MenuViewEventHandler!
     
     class func make() -> MenuViewController {
         return UIStoryboard.main.make()
@@ -43,10 +42,6 @@ class MenuViewController: UIViewController {
     
     @IBAction private func teamMembersButtonPressed(sender: AnyObject) {
         eventHandler.didPressTeamMembersButton()
-    }
-    
-    func inject(_ eventHandler: MenuViewEventHandler) {
-        self.eventHandler = eventHandler
     }
 
 }

@@ -22,6 +22,7 @@
 		B33ED8D21EF1D60600CE899E /* UserRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */; };
 		B34EC1121EF039AB00192AE0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1111EF039AB00192AE0 /* Result.swift */; };
 		B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1131EF039BF00192AE0 /* ParsingError.swift */; };
+		B3742BAB1F0179320065ACE4 /* UserGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */; };
 		B3809CA71EF31B3C00CB3CAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */; };
 		B39D020F1EF86A71006CC8D1 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39D020E1EF86A71006CC8D1 /* ReSwift.framework */; };
 		B39D02101EF86A71006CC8D1 /* ReSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B39D020E1EF86A71006CC8D1 /* ReSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -75,6 +76,7 @@
 		B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecordCell.swift; sourceTree = "<group>"; };
 		B34EC1111EF039AB00192AE0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B34EC1131EF039BF00192AE0 /* ParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
+		B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridViewModel.swift; sourceTree = "<group>"; };
 		B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = ViewController/MenuViewController.swift; sourceTree = "<group>"; };
 		B39D020E1EF86A71006CC8D1 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
 		B3AB24EC1EFAF3CF00E954EE /* StateLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateLogger.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				B30DE0751EFC5E2C0012F695 /* UserGridCoordinator.swift */,
+				B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */,
 				B30DE0691EFC4EED0012F695 /* ViewController */,
 			);
 			path = UserGrid;
@@ -401,6 +404,7 @@
 				B3AB25001EFB133400E954EE /* GameReducer.swift in Sources */,
 				B3AB24F91EFAF80900E954EE /* GameState.swift in Sources */,
 				B3CE028A1EF1A4EB0090A944 /* UserGridViewController.swift in Sources */,
+				B3742BAB1F0179320065ACE4 /* UserGridViewModel.swift in Sources */,
 				B3AB24ED1EFAF3CF00E954EE /* StateLogger.swift in Sources */,
 				B3AB24EF1EFAF44000E954EE /* AppState.swift in Sources */,
 				B30DE0761EFC5E2C0012F695 /* UserGridCoordinator.swift in Sources */,

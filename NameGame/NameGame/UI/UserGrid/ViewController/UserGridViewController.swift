@@ -11,10 +11,12 @@ import ReSwift
 
 final class UserGridViewController: UICollectionViewController {
     
-    static let reuseIdentifier = "userRecordCell"
+    static let reuseCellIdentifier = "userRecordCell"
     
-    fileprivate(set) var userRecords = [UserRecord]()
-    private let imageCache = ImageCache()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    fileprivate var imageCache: ImageCache!
+    
+    fileprivate var viewModel = UserGridViewModel()
     weak var lifecycleObserver: ViewLifecycleObserver? = nil
     
     class func make() -> UserGridViewController {
@@ -23,19 +25,31 @@ final class UserGridViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        (self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout).sectionFootersPinToVisibleBounds = true
         
         imageCache.eventObserver = self
         
-        UserRecordService.shared.fetchUserRecords { [weak self] result in
-            switch result {
-            case .success(let userRecords):
-                DispatchQueue.main.async {
-                    self?.reload(userRecords)
-                }
-            case .failure(let error):
-                print("\(error)")
-            }
-        }
+        lifecycleObserver?.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        lifecycleObserver?.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        lifecycleObserver?.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        lifecycleObserver?.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        lifecycleObserver?.viewDidDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,20 +58,32 @@ final class UserGridViewController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        guard viewModel.userRecords != nil else {
+            return 0
+        }
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let userRecords = viewModel.userRecords else {
+            return 0
+        }
         return userRecords.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = UserRecordCell.dequeueCell(in: collectionView, with: UserGridViewController.reuseIdentifier, for: indexPath)
-    
-        let cachedImage = imageCache.image(for: userRecords[indexPath.item])
+        let cell = UserRecordCell.dequeueCell(in: collectionView, with: UserGridViewController.reuseCellIdentifier, for: indexPath)
+        
+        let cachedImage = imageCache.image(for: viewModel.userRecords![indexPath.item])
         cell.imageView.image = cachedImage
     
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "mainMenuFooter", for: indexPath)
+        footerView.backgroundColor?.withAlphaComponent(0.5)
+        return footerView
     }
     
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
@@ -76,10 +102,27 @@ final class UserGridViewController: UICollectionViewController {
 
 }
 
+extension UserGridViewController {
+    
+    fileprivate func reloadVisibleCells() {
+        guard let collectionView = self.collectionView else {
+            return
+        }
+        
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
+    
+    func inject(_ imageCache: ImageCache) {
+        self.imageCache = imageCache
+    }
+    
+}
+
 extension UserGridViewController: ImageCacheEventObserver {
     
     func didCache(image: UIImage, for userRecord: UserRecord) {
-        guard let collectionView = self.collectionView else {
+        guard let collectionView = self.collectionView,
+            let userRecords = viewModel.userRecords else {
             return
         }
         
@@ -91,19 +134,35 @@ extension UserGridViewController: ImageCacheEventObserver {
     }
 }
 
-fileprivate extension UserGridViewController {
+extension UserGridViewController: StoreSubscriber {
     
-    func reload(_ userRecords: [UserRecord]) {
-        self.userRecords = userRecords.sorted()
-        collectionView?.reloadData()
+    func newState(state: UserGridViewModel) {
+        viewModel = state
+        renderLoadingStatus(with: viewModel)
     }
     
-    func reloadVisibleCells() {
-        guard let collectionView = self.collectionView else {
-            return
+    func renderLoadingStatus(with viewModel: UserGridViewModel) {
+        if viewModel.shouldShowActivityIndicator {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
         }
         
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        guard let errorMessage = viewModel.errorMessage else {
+            return
+        }
+        presentAlert(with: errorMessage)
+        
+    }
+    
+    func presentAlert(with errorMessage: String) {
+        let title = "Loading error"
+        let message = errorMessage
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionTitle = "OK"
+        let action = UIAlertAction(title: actionTitle, style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
 }

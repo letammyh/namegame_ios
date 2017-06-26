@@ -9,8 +9,7 @@
 import Foundation
 import ReSwift
 
-protocol CoordinatorHandler {
-    
+protocol MenuWorkflowPresentationEventObserver: class {
     func createUserGridCoordinator()
     func createGameCoordinator()
 }
@@ -19,7 +18,7 @@ final class MenuWorkflow {
     
     let store: Store<AppState>
     private(set) var userRecordService: UserRecordService!
-    var coordinatorHandler: CoordinatorHandler!
+    weak var presentationEventObserver: MenuWorkflowPresentationEventObserver!
     
     init(store: Store<AppState>) {
         self.store = store
@@ -47,15 +46,14 @@ final class MenuWorkflow {
     
 }
 
-extension MenuWorkflow: MenuViewEventHandler {
+extension MenuWorkflow: MenuViewEventHandler { // Logic for if we can go to next coordinator is handled here
     
     func didPressPlayButton() {
-        // TODO
-        coordinatorHandler.createGameCoordinator()
+        presentationEventObserver.createGameCoordinator()
     }
     
     func didPressTeamMembersButton() {
-        coordinatorHandler.createUserGridCoordinator()
+        presentationEventObserver.createUserGridCoordinator()
     }
     
 }
