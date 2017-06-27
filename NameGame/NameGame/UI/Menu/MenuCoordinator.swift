@@ -12,8 +12,8 @@ import ReSwift
 final class MenuCoordinator: Coordinator {
     
     private(set) var isStarted: Bool
-    let store: Store<AppState>
-    let container: UINavigationController
+    fileprivate let store: Store<AppState>
+    fileprivate let container: UINavigationController
     private(set) var controller: MenuViewController?
     fileprivate var imageCache: ImageCache!
     
@@ -49,7 +49,7 @@ final class MenuCoordinator: Coordinator {
 
 extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
     
-    func createUserGridCoordinator() {
+    func presentUserGridCoordinator() {
         let coordinator = UserGridCoordinator(store: store, container: container)
         coordinator.inject(imageCache)
         coordinator.controllerEventObserver = self
@@ -57,7 +57,7 @@ extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
         coordinator.start()
     }
     
-    func createGameCoordinator() {
+    func presentGameCoordinator() {
         // TODO
     }
     
@@ -66,9 +66,7 @@ extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
 extension MenuCoordinator: CoordinatorEventObserver {
     
     func willStop(coordinator: Coordinator) {
-        if ((coordinator as? UserGridCoordinator) != nil) {
-            currentCoordinator = nil
-        }
+        currentCoordinator = nil
     }
 
 }

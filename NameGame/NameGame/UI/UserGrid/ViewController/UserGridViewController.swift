@@ -11,7 +11,7 @@ import ReSwift
 
 final class UserGridViewController: UICollectionViewController {
     
-    static let reuseCellIdentifier = "userRecordCell"
+    private static let reuseCellIdentifier = "userRecordCell"
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     fileprivate var imageCache: ImageCache!
@@ -52,11 +52,6 @@ final class UserGridViewController: UICollectionViewController {
         lifecycleObserver?.viewDidDisappear(animated)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard viewModel.userRecords != nil else {
             return 0
@@ -72,9 +67,10 @@ final class UserGridViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = UserRecordCell.dequeueCell(in: collectionView, with: UserGridViewController.reuseCellIdentifier, for: indexPath)
+        let userRecords = viewModel.userRecords ?? []
+        let cachedImage = imageCache.image(for: userRecords[indexPath.item])
         
-        let cachedImage = imageCache.image(for: viewModel.userRecords![indexPath.item])
+        let cell = UserRecordCell.dequeueCell(in: collectionView, with: UserGridViewController.reuseCellIdentifier, for: indexPath)
         cell.imageView.image = cachedImage
     
         return cell
@@ -139,6 +135,8 @@ extension UserGridViewController: StoreSubscriber {
     func newState(state: UserGridViewModel) {
         viewModel = state
         renderLoadingStatus(with: viewModel)
+        renderUserRecords(with: viewModel)
+        presentAlert(with: viewModel)
     }
     
     func renderLoadingStatus(with viewModel: UserGridViewModel) {
@@ -147,15 +145,17 @@ extension UserGridViewController: StoreSubscriber {
         } else {
             activityIndicator.stopAnimating()
         }
-        
+    }
+    
+    func renderUserRecords( with viewModel: UserGridViewModel) {
+        collectionView?.reloadData()
+    }
+    
+    func presentAlert(with viewModel: UserGridViewModel) {
         guard let errorMessage = viewModel.errorMessage else {
             return
         }
-        presentAlert(with: errorMessage)
         
-    }
-    
-    func presentAlert(with errorMessage: String) {
         let title = "Loading error"
         let message = errorMessage
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

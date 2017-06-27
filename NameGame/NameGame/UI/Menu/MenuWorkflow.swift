@@ -10,13 +10,13 @@ import Foundation
 import ReSwift
 
 protocol MenuWorkflowPresentationEventObserver: class {
-    func createUserGridCoordinator()
-    func createGameCoordinator()
+    func presentUserGridCoordinator()
+    func presentGameCoordinator()
 }
 
 final class MenuWorkflow {
     
-    let store: Store<AppState>
+    fileprivate let store: Store<AppState>
     private(set) var userRecordService: UserRecordService!
     weak var presentationEventObserver: MenuWorkflowPresentationEventObserver!
     
@@ -49,11 +49,11 @@ final class MenuWorkflow {
 extension MenuWorkflow: MenuViewEventHandler { // Logic for if we can go to next coordinator is handled here
     
     func didPressPlayButton() {
-        presentationEventObserver.createGameCoordinator()
+        presentationEventObserver.presentGameCoordinator()
     }
     
     func didPressTeamMembersButton() {
-        presentationEventObserver.createUserGridCoordinator()
+        presentationEventObserver.presentUserGridCoordinator()
     }
     
 }

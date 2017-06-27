@@ -54,9 +54,14 @@ extension UserGridViewModel: Equatable {
                 return false
         }
         
-        if lhs.shouldShowActivityIndicator != rhs.shouldShowActivityIndicator,
-            lhs.errorMessage != rhs.errorMessage {
+        guard lhs.shouldShowActivityIndicator == rhs.shouldShowActivityIndicator else {
             return false
+        }
+        
+        guard let leftErrorMessage = lhs.errorMessage,
+            let rightErrorMessage = rhs.errorMessage,
+            leftErrorMessage == rightErrorMessage else {
+                return false
         }
         
         return true

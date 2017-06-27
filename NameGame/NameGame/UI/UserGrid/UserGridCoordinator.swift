@@ -12,10 +12,10 @@ import ReSwift
 final class UserGridCoordinator: Coordinator {
     
     private(set) var isStarted: Bool
-    let store: Store<AppState>
-    let container: UINavigationController
+    fileprivate let store: Store<AppState>
+    fileprivate let container: UINavigationController
     private(set) var controller: UserGridViewController?
-    var imageCache: ImageCache!
+    private var imageCache: ImageCache!
     
     weak var controllerEventObserver: CoordinatorEventObserver?
     
