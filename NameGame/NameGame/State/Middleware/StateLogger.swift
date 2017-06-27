@@ -10,8 +10,20 @@ import ReSwift
 
 final class StateLogger: StoreSubscriber {
     
+    enum LogLevel {
+        case fullState
+        case gameState
+    }
+    
+    var logLevel: LogLevel = .fullState
+    
     func newState(state: AppState) {
-        print("GameState: \(String(describing: state.gameState))")
+        switch logLevel {
+        case .fullState:
+            print("State: \(String(describing: state))")
+        case .gameState:
+            print("GameState: \(String(describing: state.gameState))")
+        }
     }
     
 }

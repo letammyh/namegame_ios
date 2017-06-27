@@ -12,8 +12,9 @@ import ReSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
     let logger: StateLogger
+    var window: UIWindow?
+    var appCoordinator: AppCoordinator!
     lazy var store: Store<AppState> = {
         let store = Store<AppState>(
             reducer: AppReducer.handle(action:state:),
@@ -24,13 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         self.logger = StateLogger()
+        self.logger.logLevel = .fullState
         super.init()
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+        [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        guard let window = self.window, let navigationController = window.rootViewController as? UINavigationController else {
+            preconditionFailure("Expected 'UINavigationController' as window root view controller.")
+        }
         FilePath.createDirectories()
+        appCoordinator = AppCoordinator(store: store, container: navigationController)
+        store.subscribe(logger)
+        
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        appCoordinator.start()
+    }
+    
 }
 
 

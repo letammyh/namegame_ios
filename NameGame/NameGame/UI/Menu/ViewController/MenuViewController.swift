@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import ReSwift
+
+protocol MenuViewEventHandler {
+    func didPressPlayButton()
+    func didPressTeamMembersButton()
+}
 
 class MenuViewController: UIViewController {
 
@@ -14,9 +20,14 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var teamMembersButton: UIButton!
     
+    var eventHandler: MenuViewEventHandler!
+    
+    class func make() -> MenuViewController {
+        return UIStoryboard.main.make()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -25,13 +36,14 @@ class MenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /**
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction private func playButtonPressed(sender: AnyObject) {
+        eventHandler.didPressPlayButton()
     }
-    */
+    
+    @IBAction private func teamMembersButtonPressed(sender: AnyObject) {
+        eventHandler.didPressTeamMembersButton()
+    }
 
 }
+
 
