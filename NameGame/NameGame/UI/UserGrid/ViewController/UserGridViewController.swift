@@ -115,7 +115,10 @@ extension UserGridViewController {
 }
 
 extension UserGridViewController: ImageCacheEventObserver {
-    
+    func failedToCache(_ userRecord: UserRecord) {
+        return
+    }
+
     func didCache(image: UIImage, for userRecord: UserRecord) {
         guard let collectionView = self.collectionView,
             let userRecords = viewModel.userRecords else {

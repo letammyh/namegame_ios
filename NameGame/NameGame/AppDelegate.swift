@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         self.logger = StateLogger()
-        self.logger.logLevel = .fullState
+        self.logger.logLevel = .gameState
         super.init()
     }
 

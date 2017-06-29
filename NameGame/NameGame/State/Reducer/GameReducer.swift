@@ -10,10 +10,12 @@ import ReSwift
 import UIKit
 
 enum GameAction: Action {
-    case setImages(Loading<[UIImage]>)
+    case setImages([UserRecord:UIImage])
     case setStatus(GameState.Status)
     case setScore(Int)
     case setQuestion(Question)
+    case setQuestionStatus(Question.Status)
+    case setPlayerChoice(UserRecord)
 }
 
 final class GameReducer {
@@ -23,6 +25,7 @@ final class GameReducer {
             return state
         }
         
+        var newState = state
         switch action {
         case .setImages(let loadingStatus):
             gameState.images = loadingStatus
@@ -32,9 +35,14 @@ final class GameReducer {
             gameState.score = int
         case .setQuestion(let question):
             gameState.question = question
+        case .setQuestionStatus(let status):
+            gameState.question.status = status
+        case .setPlayerChoice(let choice):
+            gameState.question.playerChoice = choice
         }
         
-        return state
+        newState.gameState = gameState
+        return newState
     }
     
 }
