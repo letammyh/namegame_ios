@@ -15,15 +15,16 @@ final class GameCoordinator: Coordinator {
     fileprivate let store: Store<AppState>
     fileprivate let container: UINavigationController
     private(set) var controller: GameViewController?
-    fileprivate var imageCache: ImageCache!
     
     weak var coordinatorEventObserver: CoordinatorEventObserver?
+    fileprivate(set) var currentCoordinator: Coordinator?
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
         self.store = store
         self.container = container
         self.controller = nil
+        self.currentCoordinator = nil
     }
     
     func start() {
@@ -31,23 +32,20 @@ final class GameCoordinator: Coordinator {
             return
         }
         
-        let controller = GameViewController.make()
         let workflow = GameWorkflow(store: store)
+        workflow.presentationEventObserver = self
         
-        guard let gameState = store.state.gameState else {
-            return
-        }
-        controller.inject(gameState.images)
-        
+        let controller = GameViewController.make()
         controller.lifecycleObserver = self
         controller.inject(workflow)
         self.controller = controller
         container.pushViewController(controller, animated: true)
         
-    }
-    
-    func inject(_ imageCache: ImageCache) {
-        self.imageCache = imageCache
+        store.subscribe(self) { subscription in
+            subscription.select { state in
+                return state.gameState
+            }
+        }
     }
     
 }
@@ -69,11 +67,39 @@ extension GameCoordinator: ViewLifecycleObserver {
         }
         
         store.unsubscribe(controller)
+        store.unsubscribe(self)
         
         // If the user presses back button during game
         if !container.viewControllers.contains(controller) {
             coordinatorEventObserver?.willStop(coordinator: self)
+            currentCoordinator = nil
         }
+    }
+    
+}
+
+extension GameCoordinator: GameWorkflowPresentationEventObserver {
+    
+    func returnToMainMenu() {
+        container.popViewController(animated: true)
+    }
+    
+    func presentEndGameCoordinator() {
+        let coordinator = EndGameCoordinator(store: store, container: container)
+        currentCoordinator = coordinator
+        coordinator.start()
+    }
+    
+}
+
+extension GameCoordinator: StoreSubscriber {
+    
+    func newState(state: GameState?) {
+        guard state == nil else {
+            return
+        }
+        
+        store.unsubscribe(self)
     }
     
 }

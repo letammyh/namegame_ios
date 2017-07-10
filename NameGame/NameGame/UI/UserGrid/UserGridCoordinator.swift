@@ -17,7 +17,7 @@ final class UserGridCoordinator: Coordinator {
     private(set) var controller: UserGridViewController?
     private var imageCache: ImageCache!
     
-    weak var coordinatorEventObserver: CoordinatorEventObserver?
+    weak var eventObserver: CoordinatorEventObserver?
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
@@ -30,12 +30,17 @@ final class UserGridCoordinator: Coordinator {
         guard !isStarted else {
             return
         }
+
+        let workflow = UserGridWorkflow()
+        workflow.presentationEventObserver = self
         
         let controller = UserGridViewController.make()
         controller.inject(imageCache)
         controller.lifecycleObserver = self
+        controller.inject(workflow)
         self.controller = controller
         container.pushViewController(controller, animated: true)
+        
     }
     
     func inject(_ imageCache: ImageCache) {
@@ -63,9 +68,16 @@ extension UserGridCoordinator: ViewLifecycleObserver {
         
         store.unsubscribe(controller)
         if !container.viewControllers.contains(controller) {
-            coordinatorEventObserver?.willStop(coordinator: self)
+            eventObserver?.willStop(coordinator: self)
         }
 
     }
     
+}
+
+extension UserGridCoordinator: UserGridWorkflowPresentationEventObserver {
+    
+    func returnToMainMenu() {
+        container.popViewController(animated: true)
+    }
 }

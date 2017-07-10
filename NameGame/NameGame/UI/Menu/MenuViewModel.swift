@@ -18,13 +18,8 @@ struct MenuViewModel {
     }
     
     init(_ state: AppState) {
-        guard let gameState = state.gameState else {
-            shouldShowActivityIndicator = false
-            return
-        }
-        
-        switch gameState.status {
-        case .preparing:
+        switch state.gameState {
+        case .some(let gameState) where gameState.status == .preparing:
             shouldShowActivityIndicator = true
         default:
             shouldShowActivityIndicator = false

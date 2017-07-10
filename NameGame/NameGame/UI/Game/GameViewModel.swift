@@ -11,25 +11,18 @@ import UIKit
 
 struct GameViewModel {
     
-    let choices: [UserRecord]?
-    let correctChoice: UserRecord?
+    let choices: [UserRecord]
+    let correctChoice: UserRecord
+    let imageDictionary: [UserRecord: UIImage]
     let questionAnsweredCorrectly: Bool?
     let score: Int
+//    let remainingQuestions: Int
+    let finishedPlaying: Bool
     
-    init() {
-        choices = nil
-        correctChoice = nil
-        questionAnsweredCorrectly = nil
-        score = 0
-    }
-    
-    init(_ state: AppState) {
-        guard let gameState = state.gameState else {
-            choices = nil
-            correctChoice = nil
-            questionAnsweredCorrectly = nil
-            score = 0
-            return
+    init?(_ state: AppState) {
+        guard let gameState = state.gameState,
+            case .playing = gameState.status else {
+            return nil
         }
         
         switch gameState.question.status {
@@ -43,7 +36,10 @@ struct GameViewModel {
         
         choices = gameState.question.choices
         correctChoice = gameState.question.correctChoice
+        imageDictionary = gameState.images
         score = gameState.score
+
+        finishedPlaying = gameState.didFinishPlaying
     }
     
 }
@@ -51,27 +47,20 @@ struct GameViewModel {
 extension GameViewModel: Equatable {
     
     public static func ==(lhs: GameViewModel, rhs: GameViewModel) -> Bool {
-        guard let leftChoices = lhs.choices,
-            let rightChoices = rhs.choices,
-            leftChoices == rightChoices else {
-                return false
-        }
-        
-        guard let leftCorrectChoice = lhs.correctChoice,
-            let rightCorrectChoice = rhs.correctChoice,
-            leftCorrectChoice == rightCorrectChoice else {
-                return false
-        }
-        
-        guard lhs.questionAnsweredCorrectly == rhs.questionAnsweredCorrectly else {
+        guard let leftIsCorrect = lhs.questionAnsweredCorrectly,
+            let rightIsCorrect = rhs.questionAnsweredCorrectly else {
             return false
         }
         
-        guard lhs.score == rhs.score else {
-            return false
+        if lhs.choices == rhs.choices,
+            lhs.correctChoice == rhs.correctChoice,
+            leftIsCorrect == rightIsCorrect,
+            lhs.score == rhs.score,
+            lhs.finishedPlaying == rhs.finishedPlaying {
+            return true
         }
         
-        return true
+        return false
     }
     
 }

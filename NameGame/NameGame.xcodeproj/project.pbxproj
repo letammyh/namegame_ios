@@ -22,6 +22,10 @@
 		B3490F4A1F054592007CAE3A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3490F491F054592007CAE3A /* MenuViewModel.swift */; };
 		B34EC1121EF039AB00192AE0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1111EF039AB00192AE0 /* Result.swift */; };
 		B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1131EF039BF00192AE0 /* ParsingError.swift */; };
+		B3547A1B1F0D238500BB730F /* UserGridWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3547A1A1F0D238500BB730F /* UserGridWorkflow.swift */; };
+		B3547A201F0D71D800BB730F /* EndGameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3547A1F1F0D71D800BB730F /* EndGameCoordinator.swift */; };
+		B3547A221F0D732E00BB730F /* EndGameWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3547A211F0D732E00BB730F /* EndGameWorkflow.swift */; };
+		B3547A261F0D74F500BB730F /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3547A251F0D74F500BB730F /* EndGameViewController.swift */; };
 		B3742BAB1F0179320065ACE4 /* UserGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */; };
 		B3809CA71EF31B3C00CB3CAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */; };
 		B39D020F1EF86A71006CC8D1 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39D020E1EF86A71006CC8D1 /* ReSwift.framework */; };
@@ -33,7 +37,6 @@
 		B3AB24FB1EFAFA1D00E954EE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB24FA1EFAFA1D00E954EE /* Question.swift */; };
 		B3AB24FE1EFB131600E954EE /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB24FD1EFB131600E954EE /* AppReducer.swift */; };
 		B3AB25001EFB133400E954EE /* GameReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB24FF1EFB133400E954EE /* GameReducer.swift */; };
-		B3C42BCC1F041D7D00BD17A5 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C42BCB1F041D7D00BD17A5 /* DictionaryExtensions.swift */; };
 		B3C42BCE1F044D2B00BD17A5 /* GamePrepWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C42BCD1F044D2B00BD17A5 /* GamePrepWorkflow.swift */; };
 		B3C4B07F1EFD55F500C65A14 /* MenuWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4B07E1EFD55F500C65A14 /* MenuWorkflow.swift */; };
 		B3CE028A1EF1A4EB0090A944 /* UserGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */; };
@@ -81,6 +84,10 @@
 		B3490F491F054592007CAE3A /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		B34EC1111EF039AB00192AE0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B34EC1131EF039BF00192AE0 /* ParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
+		B3547A1A1F0D238500BB730F /* UserGridWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridWorkflow.swift; sourceTree = "<group>"; };
+		B3547A1F1F0D71D800BB730F /* EndGameCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameCoordinator.swift; sourceTree = "<group>"; };
+		B3547A211F0D732E00BB730F /* EndGameWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameWorkflow.swift; sourceTree = "<group>"; };
+		B3547A251F0D74F500BB730F /* EndGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridViewModel.swift; sourceTree = "<group>"; };
 		B3809CA61EF31B3C00CB3CAC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B39D020E1EF86A71006CC8D1 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
@@ -91,7 +98,6 @@
 		B3AB24FA1EFAFA1D00E954EE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		B3AB24FD1EFB131600E954EE /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		B3AB24FF1EFB133400E954EE /* GameReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameReducer.swift; sourceTree = "<group>"; };
-		B3C42BCB1F041D7D00BD17A5 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
 		B3C42BCD1F044D2B00BD17A5 /* GamePrepWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePrepWorkflow.swift; sourceTree = "<group>"; };
 		B3C4B07E1EFD55F500C65A14 /* MenuWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuWorkflow.swift; sourceTree = "<group>"; };
 		B3CE02891EF1A4EB0090A944 /* UserGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 				B30DE0641EFC4C080012F695 /* Menu */,
 				B30DE0651EFC4C140012F695 /* UserGrid */,
 				B3CE1B281F02C077002FE278 /* Game */,
+				B3547A1E1F0D71C900BB730F /* EndGame */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -159,6 +166,7 @@
 				B30DE0691EFC4EED0012F695 /* ViewController */,
 				B30DE0751EFC5E2C0012F695 /* UserGridCoordinator.swift */,
 				B3742BAA1F0179320065ACE4 /* UserGridViewModel.swift */,
+				B3547A1A1F0D238500BB730F /* UserGridWorkflow.swift */,
 			);
 			path = UserGrid;
 			sourceTree = "<group>";
@@ -183,26 +191,35 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		B3490F4B1F05579C007CAE3A /* Collections */ = {
+		B3490F4B1F05579C007CAE3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				B3CE1B311F02E18D002FE278 /* ArrayExtensions.swift */,
-				B3C42BCB1F041D7D00BD17A5 /* DictionaryExtensions.swift */,
+				B30DE0721EFC52AE0012F695 /* UIStoryboardExtensions.swift */,
 			);
-			path = Collections;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B34EC1101EF0399B00192AE0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B3490F4B1F05579C007CAE3A /* Collections */,
 				B30DE0741EFC56F60012F695 /* Enums */,
+				B3490F4B1F05579C007CAE3A /* Extensions */,
 				B30DE05B1EFC46190012F695 /* Coordinator.swift */,
 				B322A4461EF182E1009ABB4B /* FilePath.swift */,
-				B30DE0721EFC52AE0012F695 /* UIStoryboardExtensions.swift */,
 				B30DE0601EFC4AC60012F695 /* ViewLifecycleObserver.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B3547A1E1F0D71C900BB730F /* EndGame */ = {
+			isa = PBXGroup;
+			children = (
+				B3547A1F1F0D71D800BB730F /* EndGameCoordinator.swift */,
+				B3547A251F0D74F500BB730F /* EndGameViewController.swift */,
+				B3547A211F0D732E00BB730F /* EndGameWorkflow.swift */,
+			);
+			path = EndGame;
 			sourceTree = "<group>";
 		};
 		B39D020B1EF86A56006CC8D1 /* Frameworks */ = {
@@ -302,9 +319,9 @@
 		EC6A1AAA1C8F6E5A0071F529 = {
 			isa = PBXGroup;
 			children = (
-				B39D020B1EF86A56006CC8D1 /* Frameworks */,
 				EC6A1AB51C8F6E5A0071F529 /* NameGame */,
 				EC6A1AB41C8F6E5A0071F529 /* Products */,
+				B39D020B1EF86A56006CC8D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -427,7 +444,9 @@
 				B3AB25001EFB133400E954EE /* GameReducer.swift in Sources */,
 				B3AB24F91EFAF80900E954EE /* GameState.swift in Sources */,
 				B3CE028A1EF1A4EB0090A944 /* UserGridViewController.swift in Sources */,
+				B3547A221F0D732E00BB730F /* EndGameWorkflow.swift in Sources */,
 				B3742BAB1F0179320065ACE4 /* UserGridViewModel.swift in Sources */,
+				B3547A261F0D74F500BB730F /* EndGameViewController.swift in Sources */,
 				B3490F4A1F054592007CAE3A /* MenuViewModel.swift in Sources */,
 				B3AB24ED1EFAF3CF00E954EE /* StateLogger.swift in Sources */,
 				B3AB24EF1EFAF44000E954EE /* AppState.swift in Sources */,
@@ -441,7 +460,6 @@
 				B3CE1B271F02B3D7002FE278 /* GameViewController.swift in Sources */,
 				B3AB24F61EFAF56900E954EE /* Loading.swift in Sources */,
 				B33ED8D21EF1D60600CE899E /* UserRecordCell.swift in Sources */,
-				B3C42BCC1F041D7D00BD17A5 /* DictionaryExtensions.swift in Sources */,
 				B30DE0611EFC4AC60012F695 /* ViewLifecycleObserver.swift in Sources */,
 				B3F5BFFB1EF03D0F003BF88D /* UserRecordDecoder.swift in Sources */,
 				B3F5BFF91EF03CF9003BF88D /* UserRecord.swift in Sources */,
@@ -449,6 +467,7 @@
 				B322A4471EF182E1009ABB4B /* FilePath.swift in Sources */,
 				B322A4431EF16E9A009ABB4B /* ResponseError.swift in Sources */,
 				B3809CA71EF31B3C00CB3CAC /* MenuViewController.swift in Sources */,
+				B3547A201F0D71D800BB730F /* EndGameCoordinator.swift in Sources */,
 				B3C42BCE1F044D2B00BD17A5 /* GamePrepWorkflow.swift in Sources */,
 				B3F5BFFD1EF03D1E003BF88D /* Headshot.swift in Sources */,
 				B3CE1B2C1F02C2E3002FE278 /* GameViewModel.swift in Sources */,
@@ -457,6 +476,7 @@
 				EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */,
 				B3CE1B2A1F02C085002FE278 /* GameCoordinator.swift in Sources */,
 				B34EC1121EF039AB00192AE0 /* Result.swift in Sources */,
+				B3547A1B1F0D238500BB730F /* UserGridWorkflow.swift in Sources */,
 				B322A4411EF16E44009ABB4B /* ImageService.swift in Sources */,
 				B3CE1B2E1F02CD56002FE278 /* GameWorkflow.swift in Sources */,
 				B30DE05C1EFC46190012F695 /* Coordinator.swift in Sources */,

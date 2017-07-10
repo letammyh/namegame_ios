@@ -50,10 +50,14 @@ final class MenuWorkflow {
 
 }
 
-extension MenuWorkflow: MenuViewEventHandler { 
+extension MenuWorkflow: MenuViewEventHandler {
     
     func didPressPlayButton() {
         gamePrepWorkflow.prepareGameState()
+    }
+    
+    func didPressMattModeButton() {
+        gamePrepWorkflow.prepareMattGameState()
     }
     
     func didPressTeamMembersButton() {

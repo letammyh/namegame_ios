@@ -11,8 +11,10 @@ import ReSwift
 
 protocol GameViewEventHandler {
     func didGetUserChoice(_ choice: UserRecord)
-    func didGetNewQuestion()
-    func didEndGame()
+    func didShowResult()
+    func didShowScore()
+    func didPressEndGame()
+    func didFinishGame()
 }
 
 class GameViewController: UIViewController {
@@ -22,9 +24,15 @@ class GameViewController: UIViewController {
     
     fileprivate var imageDictionary: [UserRecord: UIImage]!
     
-    fileprivate var viewModel = GameViewModel()
+    fileprivate var viewModel: GameViewModel?
     weak var lifecycleObserver: ViewLifecycleObserver? = nil
-    private var eventHandler: GameViewEventHandler!
+    fileprivate var eventHandler: GameViewEventHandler!
+    
+    fileprivate var currentCorrectChoiceIndex = 0
+    fileprivate var currentSelectedChoiceIndex = 0
+    
+    fileprivate let green = UIColor(red: 74.0/255.0, green: 226.0/255.0, blue: 59.0/255.0, alpha: 1)
+    fileprivate let red = UIColor(red: 228.0/255.0, green: 67.0/255.0, blue: 52.0/255.0, alpha: 1)
     
     class func make() -> GameViewController {
         return UIStoryboard.main.make()
@@ -37,6 +45,8 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        
         lifecycleObserver?.viewWillAppear(animated)
     }
     
@@ -56,69 +66,99 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func userButtonPressed(_ sender: UIButton) {
-        guard let selectedImage = sender.backgroundImage(for: .normal) else {
+        guard let viewModel = self.viewModel else {
             return
         }
-        guard let selectedUser = imageDictionary.key(for: selectedImage) else {
-            return
-        }
-        eventHandler.didGetUserChoice(selectedUser)
         
-        // Wait a few seconds before displaying new question
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-            self.eventHandler.didGetNewQuestion()
-        })
+        let index = sender.tag
+        if index >= 0, index < viewModel.choices.count {
+            currentSelectedChoiceIndex = index
+            
+            let selectedUser = viewModel.choices[index]
+            eventHandler.didGetUserChoice(selectedUser)
+        }
+    }
+    
+    @IBAction func endGameButtonPressed(_ sender: Any) {
+        eventHandler.didPressEndGame()
     }
     
     func inject(_ eventHandler: GameViewEventHandler) {
         self.eventHandler = eventHandler
-    }
-    
-    func inject(_ imageDictionary: [UserRecord:UIImage]) {
-        self.imageDictionary = imageDictionary
     }
 
 }
 
 extension GameViewController: StoreSubscriber {
     
-    func newState(state: GameViewModel) {
+    func newState(state: GameViewModel?) {
         viewModel = state
-        renderChoices(with: viewModel)
-        renderCorrectChoice(with: viewModel)
-        renderScore(with: viewModel)
+        guard let gameViewModel = viewModel else {
+            return
+        }
+        
+        renderImageDictionary(with: gameViewModel)
+        renderChoices(with: gameViewModel)
+        renderResult(with: gameViewModel)
+        renderScore(with: gameViewModel)
+        renderEndGame(with: gameViewModel)
+    }
+    
+    func renderImageDictionary(with viewModel: GameViewModel) {
+        self.imageDictionary = viewModel.imageDictionary
     }
     
     func renderChoices(with viewModel: GameViewModel) {
-        guard let choices = viewModel.choices else {
-            return
-        }
+        userButtons[currentSelectedChoiceIndex].layer.borderWidth = 0.0
+        userButtons[currentCorrectChoiceIndex].layer.borderWidth = 0.0
         
-        for (index, choice) in choices.enumerated() {
+        for (index, choice) in viewModel.choices.enumerated() {
             let image = imageDictionary[choice]
-            userButtons[index].setImage(image, for: .normal)
+            
+            let button = userButtons[index]
+            button.setImage(image, for: .normal)
+            button.tag = index
+            
+            if choice == viewModel.correctChoice {
+                currentCorrectChoiceIndex = index
+            }
         }
         
-        guard let correctChoice = viewModel.correctChoice else {
-            return
-        }
-        nameLabel.text = correctChoice.firstName + " " + correctChoice.lastName
-        nameLabel.textColor = UIColor.white
+        nameLabel.text = viewModel.correctChoice.firstName + " " + viewModel.correctChoice.lastName
+        nameLabel.textColor = UIColor(red: 51.0/255.0, green: 138.0/255.0, blue: 151.0/255.0, alpha: 1)
     }
     
-    func renderCorrectChoice(with viewModel: GameViewModel) {
+    func renderResult(with viewModel: GameViewModel) {
         guard let isCorrect = viewModel.questionAnsweredCorrectly else {
             return
         }
+        
+        userButtons[currentCorrectChoiceIndex].layer.borderWidth = 3.0
+        userButtons[currentCorrectChoiceIndex].layer.borderColor = green.cgColor
+        
         if isCorrect {
-            nameLabel.textColor = UIColor.green
+            nameLabel.textColor = green
         } else {
-            nameLabel.textColor = UIColor.red
+            userButtons[currentSelectedChoiceIndex].layer.borderColor = red.cgColor
+            userButtons[currentSelectedChoiceIndex].layer.borderWidth = 3.0
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            self.eventHandler.didShowResult()
+        })
+        
     }
     
     func renderScore(with viewModel: GameViewModel) {
         scoreLabel.text = "Score: \(viewModel.score)"
+        
+        eventHandler.didShowScore()
+    }
+    
+    func renderEndGame(with viewModel: GameViewModel) {
+        if viewModel.finishedPlaying {
+            self.eventHandler.didFinishGame()
+        }
     }
     
 }

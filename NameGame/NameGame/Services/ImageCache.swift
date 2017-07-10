@@ -11,7 +11,7 @@ import UIKit
 
 protocol ImageCacheEventObserver: class {
     func didCache(image: UIImage, for userRecord: UserRecord)
-    func failedToCache(_ userRecord: UserRecord)
+    func failedToCacheImage(for userRecord: UserRecord)
 }
 
 class ImageCache {
@@ -52,8 +52,7 @@ class ImageCache {
                 self?.eventObserver?.didCache(image: image, for: userRecord)
             }
         } catch {
-            print("\(#function): \(error)")
-            self.eventObserver?.failedToCache(userRecord)
+            self.eventObserver?.failedToCacheImage(for:userRecord)
         }
     }
     

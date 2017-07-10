@@ -15,7 +15,7 @@ struct GameState {
         case preparing
         case readyToPlay
         case playing
-        case notPlaying
+        case finishedPlaying
         case errorLoadingImages
     }
     
@@ -33,6 +33,7 @@ struct GameState {
         }
     }
     var question: Question
+    var didFinishPlaying: Bool
     
     init(userRecords: [UserRecord], answerQueue: [UserRecord], question: Question) {
         self.status = .preparing
@@ -41,6 +42,7 @@ struct GameState {
         self.answerQueue = answerQueue
         self.images = [:]
         self.question = question
+        self.didFinishPlaying = false
     }
     
 }

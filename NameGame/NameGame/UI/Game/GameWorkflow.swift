@@ -10,64 +10,83 @@ import Foundation
 import ReSwift
 import UIKit
 
+protocol GameWorkflowPresentationEventObserver: class {
+    func returnToMainMenu()
+    func presentEndGameCoordinator()
+}
+
 final class GameWorkflow {
     
     private static let numChoices = 6
     
     fileprivate let store: Store<AppState>
+    weak var presentationEventObserver: GameWorkflowPresentationEventObserver!
     
     init(store: Store<AppState>) {
         self.store = store
     }
 
-    func generateNewQuestion() -> Question? {
-        guard let gameState = store.state.gameState else {
-            return nil
-        }
-        let userRecords = gameState.userRecords.shuffled()
-        var answerQueue = gameState.answerQueue
-        
-        guard let correctChoice = answerQueue.popLast() else {
-            return nil
+    func generateNextQuestion() {
+        guard var newState = store.state.gameState else {
+            return
         }
         
-        var choices = Array(userRecords.prefix(GameWorkflow.numChoices - 1))
-        choices.append(correctChoice)
-        choices = choices.shuffled()
-        
-        return Question(choices: choices, correctChoice: correctChoice)
+        guard let correctChoice = newState.answerQueue.popLast(),
+            let correctChoiceIndex = newState.userRecords.index(of: correctChoice) else {
+                newState.didFinishPlaying = true
+                store.dispatch(AppAction.setGameState(newState))
+                return
+        }
+
+        var userRecords = newState.userRecords
+        userRecords.remove(at: correctChoiceIndex)
+        if var choices = userRecords.randomElements(count: GameWorkflow.numChoices - 1) {
+            choices.insertAtRandomIndex(correctChoice)
+            let question = Question(choices: choices, correctChoice: correctChoice)
+            newState.question = question
+            store.dispatch(AppAction.setGameState(newState))
+        }
     }
     
 }
 
 extension GameWorkflow: GameViewEventHandler {
     
-    func didGetUserChoice(_ choice: UserRecord) {
-        store.dispatch(GameAction.setPlayerChoice(choice))
-        
-        guard let gameState = store.state.gameState, let playerChoice = gameState.question.playerChoice else {
+    func didGetUserChoice(_ playerChoice: UserRecord) {
+        guard var gameState = store.state.gameState else {
             return
         }
-        
-        if playerChoice == store.state.gameState?.question.correctChoice {
-            store.dispatch(GameAction.setScore(gameState.score + 1))
-            store.dispatch(GameAction.setQuestionStatus(.correctlyAnswered))
+
+        if playerChoice == gameState.question.correctChoice {
+            gameState.question.status = .correctlyAnswered
+            gameState.score += 1
         } else {
-            store.dispatch(GameAction.setQuestionStatus(.incorrectlyAnswered))
+            gameState.question.status = .incorrectlyAnswered
         }
+        
+        store.dispatch(AppAction.setGameState(gameState))
     }
     
-    func didGetNewQuestion() {
-        guard let newQuestion = generateNewQuestion() else {
-            didEndGame()
+    func didShowResult() {
+        generateNextQuestion()
+    }
+    
+    func didShowScore() {
+        guard let gameState = store.state.gameState else {
             return
         }
         
-        store.dispatch(GameAction.setQuestion(newQuestion))
+        if gameState.answerQueue.count == 0, gameState.status == .finishedPlaying {
+            store.dispatch(GameAction.setDidFinishPlaying(true))
+        }
     }
     
-    func didEndGame() {
+    func didPressEndGame() {
         store.dispatch(AppAction.endGame)
-        // presentation event observer -- implement
+        presentationEventObserver.returnToMainMenu()
+    }
+    
+    func didFinishGame() {
+        presentationEventObserver.presentEndGameCoordinator()
     }
 }

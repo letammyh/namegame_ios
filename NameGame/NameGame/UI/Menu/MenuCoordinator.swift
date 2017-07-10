@@ -16,6 +16,7 @@ final class MenuCoordinator: Coordinator {
     fileprivate let container: UINavigationController
     private(set) var controller: MenuViewController?
     fileprivate var imageCache: ImageCache!
+    private var userRecordService: UserRecordService!
     
     fileprivate(set) var currentCoordinator: Coordinator?
     
@@ -31,9 +32,9 @@ final class MenuCoordinator: Coordinator {
         guard !isStarted else {
             return
         }
-        
+
         let menuWorkflow = MenuWorkflow(store: store)
-        menuWorkflow.inject(UserRecordService.shared)
+        menuWorkflow.inject(userRecordService)
         menuWorkflow.refreshUserRecords()
         store.subscribe(menuWorkflow) { state in
             state.select { appState in
@@ -57,6 +58,10 @@ final class MenuCoordinator: Coordinator {
         self.imageCache = imageCache
     }
     
+    func inject(_ userRecordService: UserRecordService) {
+        self.userRecordService = userRecordService
+    }
+    
 }
 
 extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
@@ -64,18 +69,16 @@ extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
     func presentUserGridCoordinator() {
         let coordinator = UserGridCoordinator(store: store, container: container)
         coordinator.inject(imageCache)
-        coordinator.coordinatorEventObserver = self
+        coordinator.eventObserver = self
         currentCoordinator = coordinator
         coordinator.start()
     }
     
     func presentGameCoordinator() {
         let coordinator = GameCoordinator(store: store, container: container)
-        coordinator.inject(imageCache)
         coordinator.coordinatorEventObserver = self
         currentCoordinator = coordinator
         coordinator.start()
-        
         store.dispatch(GameAction.setStatus(.playing))
     }
     

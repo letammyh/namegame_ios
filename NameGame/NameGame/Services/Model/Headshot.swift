@@ -58,6 +58,11 @@ struct Headshot {
             throw ParsingError.missingKey(CodingKey.width.rawValue)
         }
         
+        // Don't initialize a user record if their image is the default WT image
+        if urlString == "//images.contentful.com/3cttzl4i3k1h/5ZUiD3uOByWWuaSQsayAQ6/c630e7f851d5adb1876c118dc4811aed/featured-image-TEST1.png" {
+            throw ParsingError.hasDefaultImage
+        }
+        
         // Resolve issue with missing scheme on url value.
         if !urlString.hasPrefix("http") {
             urlString = "https:" + urlString

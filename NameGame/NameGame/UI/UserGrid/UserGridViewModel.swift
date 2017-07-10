@@ -47,22 +47,17 @@ struct UserGridViewModel {
 extension UserGridViewModel: Equatable {
     
     public static func ==(lhs: UserGridViewModel, rhs: UserGridViewModel) -> Bool {
-        guard let leftUserRecords = lhs.userRecords,
-            let rightUserRecords = rhs.userRecords,
-            leftUserRecords == rightUserRecords else {
+        guard let leftUserRecords = lhs.userRecords, let rightUserRecords = rhs.userRecords,
+            let leftErrorMessage = lhs.errorMessage, let rightErrorMessage = rhs.errorMessage else {
                 return false
         }
         
-        guard lhs.shouldShowActivityIndicator == rhs.shouldShowActivityIndicator else {
-            return false
+        if leftUserRecords == rightUserRecords,
+            leftErrorMessage == rightErrorMessage,
+            lhs.shouldShowActivityIndicator == rhs.shouldShowActivityIndicator {
+            return true
         }
         
-        guard let leftErrorMessage = lhs.errorMessage,
-            let rightErrorMessage = rhs.errorMessage,
-            leftErrorMessage == rightErrorMessage else {
-                return false
-        }
-        
-        return true
+        return false
     }
 }

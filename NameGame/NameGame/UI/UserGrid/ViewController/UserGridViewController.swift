@@ -9,6 +9,10 @@
 import UIKit
 import ReSwift
 
+protocol UserGridViewEventHandler {
+    func didPressMainMenuButton()
+}
+
 final class UserGridViewController: UICollectionViewController {
     
     private static let reuseCellIdentifier = "userRecordCell"
@@ -18,6 +22,7 @@ final class UserGridViewController: UICollectionViewController {
     
     fileprivate var viewModel = UserGridViewModel()
     weak var lifecycleObserver: ViewLifecycleObserver? = nil
+    fileprivate var eventHandler: UserGridViewEventHandler!
     
     class func make() -> UserGridViewController {
         return UIStoryboard.main.make()
@@ -34,6 +39,8 @@ final class UserGridViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        
         lifecycleObserver?.viewWillAppear(animated)
     }
     
@@ -96,6 +103,10 @@ final class UserGridViewController: UICollectionViewController {
         }
     }
 
+    @IBAction func pressedMainMenuButton(_ sender: Any) {
+        eventHandler.didPressMainMenuButton()
+    }
+    
 }
 
 extension UserGridViewController {
@@ -112,13 +123,14 @@ extension UserGridViewController {
         self.imageCache = imageCache
     }
     
+    func inject(_ eventHandler: UserGridViewEventHandler) {
+        self.eventHandler = eventHandler
+    }
+    
 }
 
 extension UserGridViewController: ImageCacheEventObserver {
-    func failedToCache(_ userRecord: UserRecord) {
-        return
-    }
-
+    
     func didCache(image: UIImage, for userRecord: UserRecord) {
         guard let collectionView = self.collectionView,
             let userRecords = viewModel.userRecords else {
@@ -131,6 +143,11 @@ extension UserGridViewController: ImageCacheEventObserver {
             cell?.imageView.image = image
         }
     }
+    
+    func failedToCacheImage(for userRecord: UserRecord) {
+        return
+    }
+    
 }
 
 extension UserGridViewController: StoreSubscriber {
