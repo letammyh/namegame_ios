@@ -13,10 +13,11 @@ struct GameViewModel {
     
     let choices: [UserRecord]
     let correctChoice: UserRecord
+    let correctChoiceIndex: Int
+    var correctChoiceNameComponents: PersonNameComponents
     let imageDictionary: [UserRecord: UIImage]
     let questionAnsweredCorrectly: Bool?
     let score: Int
-//    let remainingQuestions: Int
     let finishedPlaying: Bool
     
     init?(_ state: AppState) {
@@ -36,6 +37,12 @@ struct GameViewModel {
         
         choices = gameState.question.choices
         correctChoice = gameState.question.correctChoice
+        correctChoiceIndex = choices.index(of: correctChoice) ?? 0
+        
+        correctChoiceNameComponents = PersonNameComponents()
+        correctChoiceNameComponents.givenName = correctChoice.firstName
+        correctChoiceNameComponents.familyName = correctChoice.lastName
+        
         imageDictionary = gameState.images
         score = gameState.score
 
@@ -54,6 +61,7 @@ extension GameViewModel: Equatable {
         
         if lhs.choices == rhs.choices,
             lhs.correctChoice == rhs.correctChoice,
+            lhs.correctChoiceNameComponents == rhs.correctChoiceNameComponents,
             leftIsCorrect == rightIsCorrect,
             lhs.score == rhs.score,
             lhs.finishedPlaying == rhs.finishedPlaying {

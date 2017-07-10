@@ -18,6 +18,8 @@ final class GamePrepWorkflow {
     fileprivate let store: Store<AppState>
     private var imageCache: ImageCache!
     
+    weak var presentationEventObserver: MenuWorkflowPresentationEventObserver!
+    
     init(store: Store<AppState>) {
         self.store = store
     }
@@ -48,12 +50,13 @@ final class GamePrepWorkflow {
         }
         
         let mattUserRecords = userRecords.filter { $0.firstName.contains("Mat") }
-        GamePrepWorkflow.answerQueueSize = mattUserRecords.count
         
-        guard let gameState = generateInitialGameState(with: mattUserRecords) else {
+        guard mattUserRecords.count > 0, let gameState = generateInitialGameState(with: mattUserRecords) else {
+            presentAlert()
             return
         }
         
+        GamePrepWorkflow.answerQueueSize = mattUserRecords.count
         imageCache.eventObserver = self
         
         store.dispatch(AppAction.setGameState(gameState))
@@ -89,6 +92,17 @@ final class GamePrepWorkflow {
         }
         
         store.dispatch(GameAction.setImages(images))
+    }
+    
+    fileprivate func presentAlert() {
+        let title = "Loading error"
+        let message = "There are currently no team members named Mat(t)."
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionTitle = "OK"
+        let action = UIAlertAction(title: actionTitle, style: .default, handler: nil)
+        alert.addAction(action)
+        
+        presentationEventObserver.presentAlert(alert)
     }
     
 }

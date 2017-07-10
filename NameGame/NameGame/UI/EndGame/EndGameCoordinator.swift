@@ -27,16 +27,12 @@ final class EndGameCoordinator: Coordinator {
     }
     
     func start() {
-        guard !isStarted, let gameState = store.state.gameState else {
-            return
-        }
-        
         let workflow = EndGameWorkflow(store: store)
         workflow.presentationEventObserver = self
         
         let controller = EndGameViewController.make()
         controller.inject(workflow)
-        controller.inject(gameState.score)
+        controller.lifecycleObserver = self
         self.controller = controller
         container.pushViewController(controller, animated: true)
     }
@@ -51,6 +47,26 @@ extension EndGameCoordinator: EndGameWorkflowPresentationEventObserver {
     
     func presentNewGame() {
         container.popViewController(animated: true)
+    }
+    
+}
+
+extension EndGameCoordinator: ViewLifecycleObserver {
+    
+    func viewWillAppear(_ animated: Bool) {
+        guard let controller = controller else {
+            return
+        }
+        
+        store.subscribe(controller)
+    }
+    
+    func viewWillDisappear(_ animated: Bool) {
+        guard let controller = controller else {
+            return
+        }
+        
+        store.unsubscribe(controller)
     }
     
 }

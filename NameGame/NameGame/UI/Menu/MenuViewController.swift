@@ -129,14 +129,14 @@ extension MenuViewController: CAAnimationDelegate {
         mask.position = CGPoint(x: mainView.frame.width/2.0 + 37, y: mainView.frame.height/2.0 + 75)
         mainView.layer.mask = mask
         
-        animateDecreaseSize()
+        animateDecreaseSize(with: mask)
     }
     
-    private func animateDecreaseSize() {
+    private func animateDecreaseSize(with mask: CALayer) {
         let decreaseSize = CABasicAnimation(keyPath: "bounds")
         decreaseSize.delegate = self
         decreaseSize.duration = 1.0
-        decreaseSize.fromValue = NSValue(cgRect: mask!.bounds)
+        decreaseSize.fromValue = NSValue(cgRect: mask.bounds)
         decreaseSize.toValue = NSValue(cgRect: CGRect(x: 0, y: 0, width: 80, height: 80))
         
         decreaseSize.fillMode = kCAFillModeForwards
@@ -146,13 +146,13 @@ extension MenuViewController: CAAnimationDelegate {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        animateIncreaseSize()
+        animateIncreaseSize(with: mask)
     }
     
-    private func animateIncreaseSize() {
+    private func animateIncreaseSize(with mask: CALayer) {
         animation = CABasicAnimation(keyPath: "bounds")
         animation.duration = 2
-        animation.fromValue = NSValue(cgRect: mask!.bounds)
+        animation.fromValue = NSValue(cgRect: mask.bounds)
         animation.toValue = NSValue(cgRect: CGRect(x: 0, y: 0, width: 4000, height: 4000))
         
         animation.fillMode = kCAFillModeForwards

@@ -58,7 +58,8 @@ extension GameCoordinator: ViewLifecycleObserver {
         }
         
         store.subscribe(controller) { state in
-            state.select(GameViewModel.init) }
+            state.select(GameViewModel.init)
+        }
     }
     
     func viewWillDisappear(_ animated: Bool) {

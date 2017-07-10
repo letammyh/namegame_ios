@@ -45,6 +45,7 @@ final class MenuCoordinator: Coordinator {
         
         let gamePrepWorkflow = GamePrepWorkflow(store: store)
         gamePrepWorkflow.inject(imageCache)
+        gamePrepWorkflow.presentationEventObserver = self
         menuWorkflow.gamePrepWorkflow = gamePrepWorkflow
         
         let controller = MenuViewController.make()

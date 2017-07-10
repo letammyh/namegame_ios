@@ -20,6 +20,7 @@
 		B322A4471EF182E1009ABB4B /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322A4461EF182E1009ABB4B /* FilePath.swift */; };
 		B33ED8D21EF1D60600CE899E /* UserRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */; };
 		B3490F4A1F054592007CAE3A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3490F491F054592007CAE3A /* MenuViewModel.swift */; };
+		B34CE8031F13D8C100EC5DD9 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CE8021F13D8C100EC5DD9 /* ColorPalette.swift */; };
 		B34EC1121EF039AB00192AE0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1111EF039AB00192AE0 /* Result.swift */; };
 		B34EC1141EF039BF00192AE0 /* ParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34EC1131EF039BF00192AE0 /* ParsingError.swift */; };
 		B3547A1B1F0D238500BB730F /* UserGridWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3547A1A1F0D238500BB730F /* UserGridWorkflow.swift */; };
@@ -82,6 +83,7 @@
 		B322A4461EF182E1009ABB4B /* FilePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		B33ED8D11EF1D60600CE899E /* UserRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecordCell.swift; sourceTree = "<group>"; };
 		B3490F491F054592007CAE3A /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		B34CE8021F13D8C100EC5DD9 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		B34EC1111EF039AB00192AE0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B34EC1131EF039BF00192AE0 /* ParsingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingError.swift; sourceTree = "<group>"; };
 		B3547A1A1F0D238500BB730F /* UserGridWorkflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGridWorkflow.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				B30DE05B1EFC46190012F695 /* Coordinator.swift */,
 				B322A4461EF182E1009ABB4B /* FilePath.swift */,
 				B30DE0601EFC4AC60012F695 /* ViewLifecycleObserver.swift */,
+				B34CE8021F13D8C100EC5DD9 /* ColorPalette.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				B3547A261F0D74F500BB730F /* EndGameViewController.swift in Sources */,
 				B3490F4A1F054592007CAE3A /* MenuViewModel.swift in Sources */,
 				B3AB24ED1EFAF3CF00E954EE /* StateLogger.swift in Sources */,
+				B34CE8031F13D8C100EC5DD9 /* ColorPalette.swift in Sources */,
 				B3AB24EF1EFAF44000E954EE /* AppState.swift in Sources */,
 				B30DE0761EFC5E2C0012F695 /* UserGridCoordinator.swift in Sources */,
 				B3CE1B321F02E18D002FE278 /* ArrayExtensions.swift in Sources */,
