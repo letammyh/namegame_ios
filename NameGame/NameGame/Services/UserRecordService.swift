@@ -14,8 +14,6 @@ final class UserRecordService {
         static let userRecords = URL(string: "https://willowtreeapps.com/api/v1.0/profiles/")!
     }
     
-    static let shared = UserRecordService()
-    
     private(set) var task: URLSessionDataTask? = nil
     
     

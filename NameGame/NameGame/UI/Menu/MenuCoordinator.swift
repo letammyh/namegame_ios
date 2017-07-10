@@ -16,6 +16,7 @@ final class MenuCoordinator: Coordinator {
     fileprivate let container: UINavigationController
     private(set) var controller: MenuViewController?
     fileprivate var imageCache: ImageCache!
+    private var userRecordService: UserRecordService!
     
     fileprivate(set) var currentCoordinator: Coordinator?
     
@@ -31,18 +32,35 @@ final class MenuCoordinator: Coordinator {
         guard !isStarted else {
             return
         }
+
+        let menuWorkflow = MenuWorkflow(store: store)
+        menuWorkflow.inject(userRecordService)
+        menuWorkflow.refreshUserRecords()
+        store.subscribe(menuWorkflow) { state in
+            state.select { appState in
+                return appState.gameState
+            }
+        }
+        menuWorkflow.presentationEventObserver = self
         
-        let workflow = MenuWorkflow(store: store)
+        let gamePrepWorkflow = GamePrepWorkflow(store: store)
+        gamePrepWorkflow.inject(imageCache)
+        gamePrepWorkflow.presentationEventObserver = self
+        menuWorkflow.gamePrepWorkflow = gamePrepWorkflow
+        
         let controller = MenuViewController.make()
-        workflow.inject(UserRecordService.shared)
-        workflow.refreshUserRecords()
-        workflow.presentationEventObserver = self
-        controller.eventHandler = workflow
+        controller.inject(menuWorkflow)
+        controller.lifecycleObserver = self
+        self.controller = controller
         container.pushViewController(controller, animated: true)
     }
     
     func inject(_ imageCache: ImageCache) {
         self.imageCache = imageCache
+    }
+    
+    func inject(_ userRecordService: UserRecordService) {
+        self.userRecordService = userRecordService
     }
     
 }
@@ -52,13 +70,25 @@ extension MenuCoordinator: MenuWorkflowPresentationEventObserver {
     func presentUserGridCoordinator() {
         let coordinator = UserGridCoordinator(store: store, container: container)
         coordinator.inject(imageCache)
-        coordinator.controllerEventObserver = self
+        coordinator.eventObserver = self
         currentCoordinator = coordinator
         coordinator.start()
     }
     
     func presentGameCoordinator() {
-        // TODO
+        let coordinator = GameCoordinator(store: store, container: container)
+        coordinator.coordinatorEventObserver = self
+        currentCoordinator = coordinator
+        coordinator.start()
+        store.dispatch(GameAction.setStatus(.playing))
+    }
+    
+    func presentAlert(_ alert: UIAlertController) {
+        guard let controller = controller else {
+            return
+        }
+
+        controller.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -67,7 +97,29 @@ extension MenuCoordinator: CoordinatorEventObserver {
     
     func willStop(coordinator: Coordinator) {
         currentCoordinator = nil
+        store.dispatch(AppAction.endGame)
     }
 
+}
+
+extension MenuCoordinator: ViewLifecycleObserver {
+    
+    func viewWillAppear(_ animated: Bool) {
+        guard let controller = self.controller else {
+            return
+        }
+        
+        store.subscribe(controller) { state in
+            state.select(MenuViewModel.init)
+        }
+    }
+    
+    func viewWillDisappear(_ animated: Bool) {
+        guard let controller = self.controller else {
+            return
+        }
+        
+        store.unsubscribe(controller)
+    }
 }
 

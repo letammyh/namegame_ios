@@ -12,24 +12,37 @@ import UIKit
 struct GameState {
     
     enum Status {
+        case preparing
+        case readyToPlay
         case playing
-        case notPlaying
+        case finishedPlaying
+        case errorLoadingImages
     }
     
     var status: Status
     var score: Int
     var userRecords: [UserRecord]
     var answerQueue: [UserRecord]
-    var images: Loading<[UIImage]>
+    var images: [UserRecord: UIImage] {
+        didSet {
+            if self.userRecords.count == self.images.values.count {
+                self.status = .readyToPlay
+            } else {
+                self.status = .preparing
+            }
+        }
+    }
     var question: Question
+    var didFinishPlaying: Bool
     
     init(userRecords: [UserRecord], answerQueue: [UserRecord], question: Question) {
-        self.status = .notPlaying
+        self.status = .preparing
         self.score = 0
         self.userRecords = userRecords
         self.answerQueue = answerQueue
-        self.images = Loading.notAsked
+        self.images = [:]
         self.question = question
+        self.didFinishPlaying = false
     }
     
 }

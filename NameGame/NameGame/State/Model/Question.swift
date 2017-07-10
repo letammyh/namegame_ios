@@ -18,13 +18,11 @@ struct Question {
     
     var choices: [UserRecord]
     var correctChoice: UserRecord
-    var playerChoice: UserRecord?
     var status: Status
 
     init(choices: [UserRecord], correctChoice: UserRecord) {
         self.choices = choices
         self.correctChoice = correctChoice
-        self.playerChoice = nil
         self.status = .unanswered
     }
     

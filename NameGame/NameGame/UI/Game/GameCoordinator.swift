@@ -1,55 +1,56 @@
 //
-//  UserGridCoordinator.swift
+//  GameCoordinator.swift
 //  NameGame
 //
-//  Created by Tammy Le on 6/22/17.
+//  Created by Tammy Le on 6/27/17.
 //  Copyright © 2017 WillowTree Apps. All rights reserved.
 //
 
 import UIKit
 import ReSwift
 
-final class UserGridCoordinator: Coordinator {
+final class GameCoordinator: Coordinator {
     
     private(set) var isStarted: Bool
     fileprivate let store: Store<AppState>
     fileprivate let container: UINavigationController
-    private(set) var controller: UserGridViewController?
-    private var imageCache: ImageCache!
+    private(set) var controller: GameViewController?
     
-    weak var eventObserver: CoordinatorEventObserver?
+    weak var coordinatorEventObserver: CoordinatorEventObserver?
+    fileprivate(set) var currentCoordinator: Coordinator?
     
     init(store: Store<AppState>, container: UINavigationController) {
         self.isStarted = false
         self.store = store
         self.container = container
         self.controller = nil
+        self.currentCoordinator = nil
     }
     
     func start() {
         guard !isStarted else {
             return
         }
-
-        let workflow = UserGridWorkflow()
+        
+        let workflow = GameWorkflow(store: store)
         workflow.presentationEventObserver = self
         
-        let controller = UserGridViewController.make()
-        controller.inject(imageCache)
+        let controller = GameViewController.make()
         controller.lifecycleObserver = self
         controller.inject(workflow)
         self.controller = controller
         container.pushViewController(controller, animated: true)
         
-    }
-    
-    func inject(_ imageCache: ImageCache) {
-        self.imageCache = imageCache
+        store.subscribe(self) { subscription in
+            subscription.select { state in
+                return state.gameState
+            }
+        }
     }
     
 }
 
-extension UserGridCoordinator: ViewLifecycleObserver {
+extension GameCoordinator: ViewLifecycleObserver {
     
     func viewWillAppear(_ animated: Bool) {
         guard let controller = self.controller else {
@@ -57,7 +58,7 @@ extension UserGridCoordinator: ViewLifecycleObserver {
         }
         
         store.subscribe(controller) { state in
-            state.select(UserGridViewModel.init)
+            state.select(GameViewModel.init)
         }
     }
     
@@ -67,17 +68,39 @@ extension UserGridCoordinator: ViewLifecycleObserver {
         }
         
         store.unsubscribe(controller)
+        store.unsubscribe(self)
+        
+        // If the user presses back button during game
         if !container.viewControllers.contains(controller) {
-            eventObserver?.willStop(coordinator: self)
+            coordinatorEventObserver?.willStop(coordinator: self)
+            currentCoordinator = nil
         }
-
     }
     
 }
 
-extension UserGridCoordinator: UserGridWorkflowPresentationEventObserver {
+extension GameCoordinator: GameWorkflowPresentationEventObserver {
     
     func returnToMainMenu() {
         container.popViewController(animated: true)
     }
+    
+    func presentEndGameCoordinator() {
+        let coordinator = EndGameCoordinator(store: store, container: container)
+        currentCoordinator = coordinator
+        coordinator.start()
+    }
+    
+}
+
+extension GameCoordinator: StoreSubscriber {
+    
+    func newState(state: GameState?) {
+        guard state == nil else {
+            return
+        }
+        
+        store.unsubscribe(self)
+    }
+    
 }
